@@ -9,3 +9,7 @@ Arrumei um pouco do consumo de água, vai ficar com um alerta mas tá funcionand
 *Colocar servidor na nuvem na escola
 *Limpar os Javascript, tão cheio de coisa q n funciona >:<
 *Arrumar todo o perfil em algum dia aí
+
+04/06
+Coloquei no GitHub essa bomba, ainda to tentando deixar o banco em nuvem
+e o projeto online,-
