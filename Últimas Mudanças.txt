@@ -1,0 +1,11 @@
+Últimas Mudanças
+
+16 / 04
+Login e Cadastro arrumados com senha em password_hash("", PASSWORD_DEFAULT);
+
+09/05
+(Tomar cuidado com tamanho dos dados, por exemplo: senha(255))
+Arrumei um pouco do consumo de água, vai ficar com um alerta mas tá funcionando
+*Colocar servidor na nuvem na escola
+*Limpar os Javascript, tão cheio de coisa q n funciona >:<
+*Arrumar todo o perfil em algum dia aí

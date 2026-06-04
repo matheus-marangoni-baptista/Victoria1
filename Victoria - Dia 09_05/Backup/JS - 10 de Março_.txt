@@ -1,0 +1,842 @@
+Auth.js:
+
+const Auth = (() => {
+    const USER_KEY = 'Victoria_user';
+    const TOKEN_KEY = 'Victoria_token';
+    const USERS_STORE = 'Victoria_users';
+
+    const bufToBase64 = (buf) => btoa(String.fromCharCode(...new Uint8Array(buf)));
+
+    const base64ToBuf = (b64) => {
+        const str = atob(b64);
+        const arr = new Uint8Array(str.length);
+        for (let i = 0; i < str.length; i++) arr[i] = str.charCodeAt(i);
+        return arr.buffer;
+    };
+
+    const generateSalt = (length = 16) => {
+        const salt = new Uint8Array(length);
+        crypto.getRandomValues(salt);
+        return salt.buffer;
+    };
+
+    const deriveKey = async (password, salt, iterations = 150000, hash = 'SHA-256', keyLen = 32) => {
+        const enc = new TextEncoder();
+        const passKey = await crypto.subtle.importKey('raw', enc.encode(password), { name: 'PBKDF2' }, false, ['deriveBits']);
+        return await crypto.subtle.deriveBits(
+            { name: 'PBKDF2', salt: salt instanceof ArrayBuffer ? salt : base64ToBuf(salt), iterations, hash },
+            passKey,
+            keyLen * 8
+        );
+    };
+
+    const safeEqual = (buf1, buf2) => {
+        if (buf1.byteLength !== buf2.byteLength) return false;
+        const a = new Uint8Array(buf1), b = new Uint8Array(buf2);
+        let diff = 0;
+        for (let i = 0; i < a.length; i++) diff |= a[i] ^ b[i];
+        return diff === 0;
+    };
+
+    const getUsers = () => JSON.parse(localStorage.getItem(USERS_STORE) || '[]');
+    const saveUsers = (users) => localStorage.setItem(USERS_STORE, JSON.stringify(users));
+
+    const register = async (email, password, nome) => {
+        try {
+            const users = getUsers();
+            if (users.some(u => u.email === email)) {
+                return { success: false, message: 'Email já registrado no sistema.' };
+            }
+            if (password.length < 6) {
+                return { success: false, message: 'A senha deve conter pelo menos 6 caracteres.' };
+            }
+
+            const saltBuf = generateSalt(16);
+            const hashBuf = await deriveKey(password, saltBuf);
+
+            const newUser = {
+                id: Date.now(),
+                nome: nome,
+                email: email,
+                salt: bufToBase64(saltBuf),
+                hash: bufToBase64(hashBuf),
+                avatar: '',
+                createdAt: new Date().toISOString()
+            };
+
+            users.push(newUser);
+            saveUsers(users);
+
+            return { success: true, message: 'Conta criada com sucesso! Por favor, faça login.' };
+        } catch (error) {
+            return { success: false, message: 'Erro ao processar cadastro.' };
+        }
+    };
+
+    const login = async (email, password) => {
+        try {
+            const users = getUsers();
+            const user = users.find(u => u.email === email);
+            if (!user) return { success: false, message: 'Email ou senha inválidos.' };
+
+            const hashBuf = await deriveKey(password, base64ToBuf(user.salt));
+            const storedHashBuf = base64ToBuf(user.hash);
+
+            if (!safeEqual(hashBuf, storedHashBuf)) {
+                return { success: false, message: 'Email ou senha inválidos.' };
+            }
+
+            const token = btoa(JSON.stringify({ id: user.id, email: user.email, timestamp: Date.now() }));
+            localStorage.setItem(USER_KEY, JSON.stringify({ id: user.id, nome: user.nome, email: user.email, avatar: user.avatar }));
+            localStorage.setItem(TOKEN_KEY, token);
+
+            return { success: true, user };
+        } catch (error) {
+            return { success: false, message: 'Erro ao processar login.' };
+        }
+    };
+
+    const logout = () => {
+        localStorage.removeItem(USER_KEY);
+        localStorage.removeItem(TOKEN_KEY);
+        return { success: true };
+    };
+
+    const getCurrentUser = () => {
+        try {
+            const userStr = localStorage.getItem(USER_KEY);
+            return userStr ? JSON.parse(userStr) : null;
+        } catch (e) { return null; }
+    };
+
+    const isAuthenticated = () => !!localStorage.getItem(TOKEN_KEY);
+
+    const updateAvatar = (avatarData) => {
+        try {
+            const user = getCurrentUser();
+            if (!user) return { success: false };
+
+            const users = getUsers();
+            const index = users.findIndex(u => u.id === user.id);
+            if (index !== -1) {
+                users[index].avatar = avatarData;
+                saveUsers(users);
+
+                user.avatar = avatarData;
+                localStorage.setItem(USER_KEY, JSON.stringify(user));
+                return { success: true, user };
+            }
+            return { success: false };
+        } catch (error) { return { success: false }; }
+    };
+
+    return { register, login, logout, getCurrentUser, isAuthenticated, updateAvatar };
+})();
+
+function checkAuthOnPageLoad() {
+    const currentPage = window.location.pathname.toLowerCase();
+
+    const paginasPublicas = [
+        'inicial.html',
+        'login.html',
+        'cadastro.html',
+        'sobre.html',
+        'Metodologia.html',
+        'documentacao.html',
+        'referencias.html',
+        'protocolos.html',
+        'hardware.html',
+        '/'
+    ];
+
+    const paginasProtegidas = [
+        'dashboard.html',
+        'relatórios.html',
+        'relatorios.html'
+    ];
+
+    const ehPaginaProtegida = paginasProtegidas.some(pagina =>
+        currentPage.includes(pagina)
+    );
+
+    if (ehPaginaProtegida && !Auth.isAuthenticated()) {
+        Swal.fire({
+            title: 'Acesso Restrito',
+            html: '<p style="font-size: 1rem; color: #333;">Esta página requer autenticação.</p><p style="font-size: 0.9rem; color: #666;">Por favor, faça login para continuar.</p>',
+            icon: 'warning',
+            confirmButtonText: 'Ir para Login',
+            allowOutsideClick: false,
+            allowEscapeKey: false,
+            didOpen: () => {
+                const popup = Swal.getPopup();
+                const btnVoltar = document.createElement('button');
+                btnVoltar.textContent = 'Voltar';
+                btnVoltar.className = 'swal2-cancel swal2-styled';
+                btnVoltar.style.marginRight = '10px';
+                btnVoltar.onclick = () => {
+                    window.history.back();
+                    Swal.close();
+                };
+                popup.querySelector('.swal2-actions').insertBefore(btnVoltar, popup.querySelector('.swal2-confirm'));
+            }
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = 'Login.html';
+            }
+        });
+        return;
+    }
+
+    if ((currentPage.includes('login.html') || currentPage.includes('cadastro.html')) && Auth.isAuthenticated()) {
+        window.location.href = 'Inicial.html';
+    }
+}
+
+document.addEventListener('DOMContentLoaded', checkAuthOnPageLoad);
+
+/-----------------------------------------------------------------------------------------------/
+
+Geral.js:
+
+function mostrarAlerta(titulo, texto, icone = 'info') {
+    if (typeof Swal !== 'undefined') {
+        Swal.fire({
+            title: titulo,
+            text: texto,
+            icon: icone,
+            iconColor: icone === 'success' ? '#598392' : (icone === 'error' ? '#e63946' : '#ff9800'),
+            confirmButtonColor: '#124559',
+            background: 'rgba(255, 255, 255, 0.95)',
+            backdrop: 'rgba(0, 0, 0, 0.5)',
+            customClass: {
+                container: 'swal-container-custom',
+                popup: 'swal-popup-custom',
+                title: 'swal-title-custom'
+            },
+            didOpen: (popup) => {
+                popup.style.zIndex = '10000';
+            }
+        });
+    } else {
+        alert(texto);
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+
+    const navItems = document.querySelectorAll('.nav-item.has-dropdown');
+    const btnLoginNav = document.getElementById('btn-login-nav');
+    const wrapperUsuario = document.getElementById('wrapper-usuario-logado');
+    const btnAvatar = document.getElementById('btn-avatar-nav');
+    const dropdownPerfil = document.getElementById('dropdown-perfil');
+    const btnLogout = document.getElementById('btn-logout');
+    const btnFecharDropdown = document.getElementById('fechar-dropdown');
+
+    const modalCrop = document.getElementById('modal-crop-foto');
+    const dropzone = document.getElementById('dropzone-avatar');
+    const inputFoto = document.getElementById('input-foto-oculto');
+    const imagemParaCortar = document.getElementById('imagem-para-cortar');
+    const cropperContainer = document.querySelector('.cropper-container');
+    const btnSalvarCrop = document.getElementById('btn-salvar-crop');
+
+    const btnCancelarModal = document.getElementById('btn-cancelar-crop');
+    const btnFecharModalX = document.getElementById('btn-fechar-modal-crop');
+
+    let cropperInstance = null;
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('.container-box, .section-header, .spec-card, .reveal').forEach(el => {
+        el.classList.add('reveal');
+        observer.observe(el);
+    });
+
+    navItems.forEach(item => {
+        const menu = item.querySelector('.mega-menu-wrapper');
+        let timeout;
+
+        item.addEventListener('mouseenter', () => {
+            if (window.innerWidth > 992) {
+                clearTimeout(timeout);
+                if (menu) {
+                    menu.style.display = 'block';
+                    void menu.offsetWidth;
+                    menu.classList.add('is-visible');
+                }
+            }
+        });
+
+        item.addEventListener('mouseleave', () => {
+            if (window.innerWidth > 992 && menu) {
+                timeout = setTimeout(() => {
+                    menu.classList.remove('is-visible');
+                    setTimeout(() => {
+                        if (!menu.classList.contains('is-visible')) menu.style.display = 'none';
+                    }, 300);
+                }, 200);
+            }
+        });
+    });
+
+    function gerarCorAvatarSegura(email) {
+        let hash = 0;
+        const str = email || "default";
+        for (let i = 0; i < str.length; i++) {
+            hash = str.charCodeAt(i) + ((hash << 5) - hash);
+        }
+        const h = Math.abs(hash % 360);
+        return `hsl(${h}, 65%, 40%)`;
+    }
+
+    function configurarDadosUsuario() {
+        const userData = Auth.getCurrentUser();
+        if (!userData) return;
+
+        const inicial = userData.nome ? userData.nome.charAt(0).toUpperCase() : '?';
+        const emailEl = document.querySelector('.user-email');
+        const saudacaoEl = document.querySelector('.saudacao-usuario');
+
+        if (emailEl) {
+            emailEl.textContent = userData.email;
+            emailEl.style.textAlign = 'center';
+            emailEl.style.display = 'block';
+            emailEl.style.width = '100%';
+        }
+        if (saudacaoEl) {
+            saudacaoEl.textContent = `Olá, ${userData.nome.split(' ')[0]}!`;
+            saudacaoEl.style.textAlign = 'center';
+            saudacaoEl.style.width = '100%';
+        }
+
+        const corFundo = gerarCorAvatarSegura(userData.email);
+        const temFoto = userData.avatar && userData.avatar.length > 50;
+
+        const htmlAvatar = temFoto
+            ? `<img src="${userData.avatar}" alt="Perfil" style="width:100%; height:100%; object-fit:cover; border-radius:50%;">`
+            : `<div style="background:${corFundo}; color:white; width:100%; height:100%; display:flex; align-items:center; justify-content:center; border-radius:50%; font-weight:bold;">${inicial}</div>`;
+
+        if (btnAvatar) btnAvatar.innerHTML = htmlAvatar;
+
+        const containerGrande = document.querySelector('.avatar-grande-container');
+        if (containerGrande) {
+            containerGrande.innerHTML = htmlAvatar + `<button class="btn-editar-foto" title="Alterar foto"><i class="fas fa-camera"></i></button>`;
+        }
+    }
+
+    if (dropzone && inputFoto) {
+        dropzone.addEventListener('click', () => {
+            inputFoto.click();
+        });
+
+        dropzone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            dropzone.style.backgroundColor = 'rgba(89, 131, 146, 0.15)';
+            dropzone.style.borderColor = 'var(--soft-periwinkle)';
+        });
+
+        dropzone.addEventListener('dragleave', () => {
+            dropzone.style.backgroundColor = '';
+            dropzone.style.borderColor = '';
+        });
+
+        dropzone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dropzone.style.backgroundColor = '';
+            dropzone.style.borderColor = '';
+
+            const files = e.dataTransfer.files;
+            if (files.length > 0 && files[0].type.startsWith('image/')) {
+                processarArquivoComCropper(files[0]);
+            } else {
+                mostrarAlerta('Erro', 'Por favor, arraste uma imagem válida.', 'error');
+            }
+        });
+
+        inputFoto.addEventListener('change', (e) => {
+            if (e.target.files.length > 0) {
+                processarArquivoComCropper(e.target.files[0]);
+            }
+        });
+    }
+
+    document.addEventListener('paste', (e) => {
+        if (modalCrop && modalCrop.style.display !== 'none') {
+            const items = e.clipboardData?.items;
+            if (items) {
+                for (let item of items) {
+                    if (item.type.startsWith('image/')) {
+                        const blob = item.getAsFile();
+                        processarArquivoComCropper(blob);
+                        break;
+                    }
+                }
+            }
+        }
+    });
+
+    function inicializarCropper(imagemSrc) {
+        if (cropperInstance) {
+            cropperInstance.destroy();
+            cropperInstance = null;
+        }
+
+        if (dropzone) dropzone.style.display = 'none';
+
+        if (cropperContainer) cropperContainer.style.display = 'block';
+        if (imagemParaCortar) {
+            imagemParaCortar.src = imagemSrc;
+
+            cropperInstance = new Cropper(imagemParaCortar, {
+                aspectRatio: 1,
+                viewMode: 1,
+                autoCropArea: 0.8,
+                responsive: true,
+                restore: true,
+                guides: true,
+                center: true,
+                highlight: true,
+                cropBoxMovable: true,
+                cropBoxResizable: true,
+                toggleDragModeOnDblclick: true,
+                background: true,
+                modal: true,
+
+                crop(e) {
+                }
+            });
+        }
+
+        if (btnSalvarCrop) {
+            btnSalvarCrop.style.display = 'inline-block';
+        }
+    }
+
+    function processarArquivoComCropper(file) {
+        if (!file.type.startsWith('image/')) {
+            mostrarAlerta('Erro', 'Por favor, selecione um arquivo de imagem.', 'error');
+            return;
+        }
+
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            if (modalCrop) modalCrop.style.display = 'flex';
+            inicializarCropper(e.target.result);
+        };
+        reader.readAsDataURL(file);
+    }
+
+    if (btnSalvarCrop) {
+        btnSalvarCrop.addEventListener('click', async () => {
+            if (!cropperInstance) {
+                mostrarAlerta('Erro', 'Nenhuma imagem para salvar.', 'error');
+                return;
+            }
+
+            const textoOriginal = btnSalvarCrop.innerHTML;
+            btnSalvarCrop.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Salvando...';
+            btnSalvarCrop.disabled = true;
+
+            try {
+                const canvas = cropperInstance.getCroppedCanvas({
+                    maxWidth: 200,
+                    maxHeight: 200,
+                    fillColor: '#fff',
+                    imageSmoothingEnabled: true,
+                    imageSmoothingQuality: 'high',
+                });
+
+                const avatarData = canvas.toDataURL('image/png');
+
+                const result = Auth.updateAvatar(avatarData);
+                if (result.success) {
+                    configurarDadosUsuario();
+                    mostrarAlerta('Sucesso', 'Foto atualizada com sucesso!', 'success');
+                    fecharModalCrop();
+                } else {
+                    mostrarAlerta('Erro', result.message, 'error');
+                }
+            } catch (err) {
+                console.error('Erro ao salvar foto:', err);
+                mostrarAlerta('Erro', 'Não foi possível salvar a imagem.', 'error');
+            } finally {
+                btnSalvarCrop.innerHTML = textoOriginal;
+                btnSalvarCrop.disabled = false;
+            }
+        });
+    }
+
+    if (btnCancelarModal) {
+        btnCancelarModal.addEventListener('click', () => {
+            fecharModalCrop();
+        });
+    }
+
+    function fecharModalCrop() {
+        if (modalCrop) modalCrop.style.display = 'none';
+
+        if (cropperInstance) {
+            cropperInstance.destroy();
+            cropperInstance = null;
+        }
+
+        if (dropzone) {
+            dropzone.style.setProperty('display', 'flex', 'important');
+            dropzone.style.setProperty('flex-direction', 'column', 'important');
+        }
+
+        if (cropperContainer) cropperContainer.style.display = 'none';
+        if (inputFoto) inputFoto.value = '';
+        if (btnSalvarCrop) btnSalvarCrop.style.display = 'none';
+    }
+
+    if (btnFecharModalX) {
+        btnFecharModalX.addEventListener('click', () => {
+            fecharModalCrop();
+        });
+    }
+
+    if (btnAvatar) {
+        btnAvatar.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (dropdownPerfil) dropdownPerfil.classList.toggle('ativo');
+        });
+    }
+
+    if (btnLogout) {
+        btnLogout.addEventListener('click', (e) => {
+            e.preventDefault();
+            Auth.logout();
+
+            Swal.fire({
+                title: 'Sessão Encerrada',
+                html: '<p style="color: #333; margin-top: 10px;">Você deslogou da sua conta.  Até a próxima!</p> ',
+                icon: 'success',
+                iconColor: '#598392',
+                background: 'rgba(255, 255, 255, 0.95)',
+                backdrop: 'rgba(0, 0, 0, 0.5)',
+                confirmButtonColor: '#124559',
+                showConfirmButton: true,
+                confirmButtonText: 'Até logo',
+                timer: 3000,
+                timerProgressBar: true,
+                customClass: {
+                popup: 'swal-popup-custom',
+                title: 'swal-title-custom'
+            },
+                willClose: () => {
+                    window.location.href = 'Inicial.html';
+                }
+            });
+        });
+    }
+
+    if (btnFecharDropdown) {
+        btnFecharDropdown.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (dropdownPerfil) dropdownPerfil.classList.remove('ativo');
+        });
+    }
+
+    document.addEventListener('click', (e) => {
+        if (e.target.closest('.btn-editar-foto')) {
+            if (modalCrop) modalCrop.style.display = 'flex';
+        }
+
+        if (dropdownPerfil && dropdownPerfil.classList.contains('ativo')) {
+            const clickedInsideDropdown = dropdownPerfil.contains(e.target);
+            const clickedAvatar = btnAvatar ? btnAvatar.contains(e.target) : false;
+
+            if (!clickedInsideDropdown && !clickedAvatar) {
+                dropdownPerfil.classList.remove('ativo');
+            }
+        }
+
+        if (e.target.classList.contains('toggle-password')) {
+            const input = e.target.previousElementSibling;
+            if (input && input.type === 'password') {
+                input.type = 'text';
+                e.target.classList.remove('fa-eye');
+                e.target.classList.add('fa-eye-slash');
+            } else if (input && input.type === 'text') {
+                input.type = 'password';
+                e.target.classList.remove('fa-eye-slash');
+                e.target.classList.add('fa-eye');
+            }
+        }
+    });
+
+    if (Auth.isAuthenticated()) {
+        if (btnLoginNav) btnLoginNav.style.display = 'none';
+        if (wrapperUsuario) wrapperUsuario.style.display = 'flex';
+        configurarDadosUsuario();
+    } else {
+        if (btnLoginNav) btnLoginNav.style.display = 'flex';
+        if (wrapperUsuario) wrapperUsuario.style.display = 'none';
+    }
+});
+
+
+/-----------------------------------------------------------------------------------------------/
+
+Inicial.js:
+
+document.addEventListener('DOMContentLoaded', () => {
+    const slides = Array.from(document.querySelectorAll('.carousel-slide'));
+    const dots = document.querySelectorAll('.dot');
+    const btnNext = document.querySelector('.carousel-control.next');
+    const btnPrev = document.querySelector('.carousel-control.prev');
+    const carouselContainer = document.querySelector('.carousel-container');
+
+    let currentSlide = 0;
+    const intervalTime = 5000;
+    let slideTimer = null;
+
+    function updateCarousel() {
+        slides.forEach((slide, index) => {
+            if (index === currentSlide) {
+                slide.style.opacity = '1';
+                slide.style.transition = 'opacity 0.8s ease-in-out';
+                slide.classList.add('active');
+            } else {
+                slide.style.opacity = '0';
+                slide.style.transition = 'opacity 0.8s ease-in-out';
+                slide.classList.remove('active');
+            }
+        });
+
+        dots.forEach((dot, index) => {
+            if (index === currentSlide) {
+                dot.classList.add('active');
+            } else {
+                dot.classList.remove('active');
+            }
+        });
+
+        console.log(`Slide atual: ${currentSlide}`);
+    }
+
+    function nextSlide() {
+        currentSlide = (currentSlide + 1) % slides.length;
+        updateCarousel();
+    }
+
+    function prevSlide() {
+        currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+        updateCarousel();
+    }
+
+    function resetTimer() {
+        if (slideTimer) {
+            clearInterval(slideTimer);
+            slideTimer = null;
+        }
+        slideTimer = setInterval(() => {
+            nextSlide();
+        }, intervalTime);
+        console.log('Timer resetado');
+    }
+
+    
+
+    if (btnNext) {
+        btnNext.addEventListener('click', () => {
+            nextSlide();
+            resetTimer();
+        });
+    }
+
+    if (btnPrev) {
+        btnPrev.addEventListener('click', () => {
+            prevSlide();
+            resetTimer();
+        });
+    }
+
+    dots.forEach((dot, index) => {
+        dot.addEventListener('click', () => {
+            currentSlide = index;
+            updateCarousel();
+            resetTimer();
+        });
+    });
+
+    if (carouselContainer) {
+        carouselContainer.addEventListener('mouseenter', () => {
+            console.log('Mouse entrou - pausando autoplay');
+            stopAutoPlay();
+        });
+
+        carouselContainer.addEventListener('mouseleave', () => {
+            console.log('Mouse saiu - retomando autoplay');
+            resetTimer();
+        });
+    }
+
+    console.log(`Carrossel inicializado com ${slides.length} slides`);
+    updateCarousel();
+    resetTimer();
+});
+
+
+/-----------------------------------------------------------------------------------------------/
+
+Cadastro.js:
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    const cadastroForm = document.getElementById('cadastroForm');
+
+    if (cadastroForm) {
+        cadastroForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const nome = document.getElementById('nome').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+            const termsAgreed = document.querySelector('input[name="terms"]').checked;
+
+            if (!nome || !email || !password || !confirmPassword) {
+                mostrarAlerta('Erro', 'Preencha todos os campos obrigatórios.', 'error');
+                return;
+            }
+
+            if (nome.length < 3) {
+                mostrarAlerta('Erro', 'Nome deve ter no mínimo 3 caracteres.', 'error');
+                return;
+            }
+
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                mostrarAlerta('Erro', 'Digite um email válido.', 'error');
+                return;
+            }
+
+            if (password.length < 6) {
+                mostrarAlerta('Erro', 'Senha deve ter no mínimo 6 caracteres.', 'error');
+                return;
+            }
+
+            if (password !== confirmPassword) {
+                mostrarAlerta('Erro', 'As senhas não correspondem.', 'error');
+                return;
+            }
+
+            if (!termsAgreed) {
+                mostrarAlerta('Erro', 'Você deve concordar com os Termos de Serviço.', 'error');
+                return;
+            }
+
+            try {
+                const result = await Auth.register(email, password, nome);
+                if (result.success) {
+                    mostrarAlerta('Sucesso', 'Cadastro realizado com sucesso! Redirecionando para login...', 'success');
+                    setTimeout(() => {
+                        window.location.href = 'Login.html';
+                    }, 2000);
+                } else {
+                    mostrarAlerta('Erro de Cadastro', result.message, 'error');
+                }
+            } catch (err) {
+                mostrarAlerta('Erro', 'Falha ao processar o cadastro.', 'error');
+            }
+        });
+    }
+
+    const emailInput = document.getElementById('email');
+    if (emailInput) {
+        emailInput.addEventListener('blur', () => {
+            const email = emailInput.value.trim();
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            if (email && !emailRegex.test(email)) {
+                emailInput.style.borderColor = '#ff6b6b';
+            } else {
+                emailInput.style.borderColor = 'rgba(255, 255, 255, 0.1)';
+            }
+        });
+    }
+
+    const passwordInput = document.getElementById('password');
+    const confirmPasswordInput = document.getElementById('confirm-password');
+
+    if (confirmPasswordInput && passwordInput) {
+        confirmPasswordInput.addEventListener('input', () => {
+            if (passwordInput.value && confirmPasswordInput.value) {
+                if (passwordInput.value !== confirmPasswordInput.value) {
+                    confirmPasswordInput.style.borderColor = '#ff6b6b';
+                } else {
+                    confirmPasswordInput.style.borderColor = 'rgba(255, 255, 255, 0.1)';
+                }
+            }
+        });
+    }
+});
+
+
+
+/-----------------------------------------------------------------------------------------------/
+
+Login.js:
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    const loginForm = document.getElementById('loginForm');
+
+    if (loginForm) {
+        loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value;
+
+            if (!email || !password) {
+                mostrarAlerta('Erro', 'Digite email e senha para continuar.', 'error');
+                return;
+            }
+
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                mostrarAlerta('Erro', 'Digite um email válido.', 'error');
+                return;
+            }
+
+            try {
+                const result = await Auth.login(email, password);
+                if (result.success) {
+                    mostrarAlerta('Sucesso', 'Login realizado com sucesso!', 'success');
+                    setTimeout(() => {
+                        window.location.href = 'Inicial.html';
+                    }, 1500);
+                } else {
+                    mostrarAlerta('Erro de Autenticação', result.message, 'error');
+                }
+            } catch (err) {
+                mostrarAlerta('Erro', 'Falha ao processar o login.', 'error');
+            }
+        });
+    }
+
+    const forgotPasswordLinks = document.querySelectorAll('.link-opcoes');
+    forgotPasswordLinks.forEach(link => {
+        if (link.textContent.includes('Esqueci')) {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                mostrarAlerta(
+                    'Recuperar Senha',
+                    'A funcionalidade de recuperação de senha ainda não está disponível. Por favor, espere um pouco até a transição de login local para server-side :3 .',
+                    'info'
+                );
+            });
+        }
+    });
+});
+
+/-----------------------------------------------------------------------------------------------/

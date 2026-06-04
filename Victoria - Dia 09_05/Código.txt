@@ -1,0 +1,2057 @@
+HTML:
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Victoria - Iluminando caminhos através da tecnologia e inovação.">
+    <title>Perfil | Projeto Victoria</title>
+
+    <link rel="stylesheet" href="../CSS/Geral.css">
+    <link rel="stylesheet" href="../CSS/Perfil.css">
+    <link rel="stylesheet" href="../CSS/Responsividade.css">
+
+    <link rel="icon" type="image/x-icon" href="../Imagens/Ícones/Victoria.ico">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
+</head>
+
+<body>
+    <div id="top"></div>
+
+    <nav class="nav-wrapper">
+        <div class="nav-content">
+            <a href="Inicial.html" class="brand-logo">
+                <img src="../Imagens/Geral/Victoria.png" alt="Logotipo Victoria" class="logo-icon">
+            </a>
+
+            <ul class="nav-list-center">
+                <li class="nav-item has-dropdown">
+                    <a href="#" class="nav-link">
+                        <i class="fa-solid fa-droplet nav-icon"></i> Plataforma
+                        <svg class="chevron-icon" width="10" height="6" viewBox="0 0 10 6" fill="none">
+                            <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                        </svg>
+                    </a>
+                    <div class="mega-menu-wrapper">
+                        <div class="mega-menu-inner">
+                            <div class="menu-column">
+                                <h3><i class="fa-solid fa-chart-line"></i> Telemetria</h3>
+                                <a href="Dashboard.html" class="rich-link-item">
+                                    <span class="item-title">Dashboard Analítico</span>
+                                    <span class="item-desc">Monitoramento de fluxo em tempo real.</span>
+                                </a>
+                                <a href="Relatórios.html" class="rich-link-item">
+                                    <span class="item-title">Relatórios Estatísticos</span>
+                                    <span class="item-desc">Consumo médio e picos de vazão.</span>
+                                </a>
+                            </div>
+                            <div class="menu-column">
+                                <h3><i class="fa-solid fa-microchip"></i> Arquitetura</h3>
+                                <a href="Hardware.html" class="rich-link-item">
+                                    <span class="item-title">Especificação de Hardware</span>
+                                    <span class="item-desc">Microcontroladores e sensores de precisão.</span>
+                                </a>
+                                <a href="Protocolos.html" class="rich-link-item">
+                                    <span class="item-title">Protocolos IoT</span>
+                                    <span class="item-desc">Comunicação e integridade de dados.</span>
+                                </a>
+                            </div>
+                            <div class="menu-column">
+                                <h3><i class="fa-solid fa-book"></i> Acadêmico</h3>
+                                <a href="Documentação.html" class="rich-link-item">
+                                    <span class="item-title">Documentação</span>
+                                    <span class="item-desc">Documentação técnica integral do projeto.</span>
+                                </a>
+                                <a href="Referências.html" class="rich-link-item">
+                                    <span class="item-title">Referencial Teórico</span>
+                                    <span class="item-desc">Base científica do ecossistema Victoria.</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="nav-item"><a href="Metodologia.html" class="nav-link"><i
+                            class="fa-solid fa-flask nav-icon"></i>
+                        Metodologia</a>
+                </li>
+                <li class="nav-item"><a href="Sobre.html" class="nav-link"><i
+                            class="fa-solid fa-circle-info nav-icon"></i>
+                        Sobre o
+                        TCC</a></li>
+            </ul>
+
+            <div class="nav-right">
+                <div class="container-usuario-nav">
+                    <a href="Login.html" class="nav-btn-access" id="btn-login-nav">
+                        <i class="fa-solid fa-key"></i> Fazer Login
+                    </a>
+
+                    <div class="perfil-usuario-wrapper" id="wrapper-usuario-logado" style="display: none;">
+                        <button class="avatar-trigger-nav" id="btn-avatar-nav">
+                            <span class="inicial-avatar">?</span>
+                        </button>
+
+                        <div class="dropdown-perfil-glass" id="dropdown-perfil">
+                            <div class="dropdown-header">
+                                <span class="user-email"></span>
+                                <button class="btn-fechar-dropdown" id="fechar-dropdown"><i
+                                        class="fas fa-times"></i></button>
+                            </div>
+
+                            <div class="dropdown-body-central">
+                                <div class="avatar-grande-container">
+                                    <span class="inicial-avatar-grande">?</span>
+                                    <button class="btn-editar-foto"><i class="fas fa-camera"></i></button>
+                                </div>
+                                <h3 class="saudacao-usuario"></h3>
+                                <a href="Perfil.html" class="btn-gerir-conta">Configurações de Perfil</a>
+                            </div>
+
+                            <div class="dropdown-footer">
+                                <button class="btn-logout" id="btn-logout">
+                                    <i class="fas fa-sign-out-alt"></i> Encerrar Sessão
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+<main class="perfil-container-hero">
+    <section class="perfil-hero">
+        <div class="perfil-banner" id="perfilBanner">
+            <div class="banner-overlay"></div>
+            <button class="btn-editar-banner" id="btnEditarBanner">
+                <i class="fas fa-image"></i> Alterar Wallpaper
+            </button>
+            <input type="file" id="fileWallpaper" accept="image/*" style="display: none;">
+        </div>
+
+        <div class="perfil-header-content">
+            <div class="perfil-avatar-section">
+                <div class="perfil-avatar" id="perfilAvatar"></div>
+                <button class="btn-editar-avatar" id="btnEditarAvatar">
+                    <i class="fas fa-camera"></i>
+                </button>
+            </div>
+
+            <div class="perfil-info-hero">
+                <div class="info-text info-box-destaque">
+                    <h1 class="perfil-nome" id="perfilNome">Carregando...</h1>
+                    <div class="user-identifiers">
+                        <span class="perfil-username" id="perfilUsername">@usuario</span>
+                        <span class="perfil-email-full" id="perfilEmail">email@exemplo.com</span>
+                    </div>
+                </div>
+                <button class="btn-editar-perfil" id="btnEditarPerfil">
+                    <i class="fas fa-edit"></i> Editar Perfil
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <div class="perfil-dashboard-grid">
+
+        <section class="perfil-main-content">
+            <p class="perfil-bio" id="perfilBio">Adicione uma descrição ao seu perfil</p>
+
+            <div class="perfil-meta-inline">
+                <span class="meta-item"><i class="fas fa-map-marker-alt"></i> <span id="perfilCidade">...</span></span>
+                <span class="meta-item"><i class="fas fa-briefcase"></i> <span id="perfilProfissao">...</span></span>
+                <span class="meta-item"><i class="fas fa-link"></i> <a href="#" id="perfilWebsite"
+                        class="meta-link">Website</a></span>
+                <span class="meta-item"><i class="fas fa-calendar"></i> <span id="perfilDataCadastro">...</span></span>
+            </div>
+
+            <div class="stats-grid-inner">
+                <div class="stat-card">
+                    <i class="fas fa-water"></i>
+                    <div class="stat-info">
+                        <p>Consumo Mensal</p>
+                        <b id="statConsumo">0 L</b>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-leaf"></i>
+                    <div class="stat-info">
+                        <p>Economia</p>
+                        <b id="statEconomia">0 L</b>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-chart-line"></i>
+                    <div class="stat-info">
+                        <p>Eficiência</p>
+                        <b id="statEficiencia">0%</b>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-star"></i>
+                    <div class="stat-info">
+                        <p>Pontuação</p>
+                        <b id="statPontuacao">0 pts</b>
+                    </div>
+                </div>
+                <div id="statusArduino" class="stat-card arduino-full"></div>
+            </div>
+        </section>
+
+        <aside class="perfil-activity-sidebar">
+            <div class="sidebar-header">
+                <i class="fas fa-history"></i>
+                <h2>Atividade Recente</h2>
+            </div>
+            <div class="activity-list" id="activityList">
+            </div>
+        </aside>
+
+    </div>
+</main>
+
+<div class="modal-editar" id="modalEditar">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>Editar Perfil</h2>
+            <button class="btn-fechar-modal" id="btnFecharModal">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+
+    <form class="form-editar" id="formEditar">
+            <div class="form-group">
+                <label for="editNome">Nome Completo</label>
+                <input type="text" id="editNome" placeholder="Seu nome completo" maxlength="50">
+                <span class="form-hint" id="hintNome">0/50</span>
+            </div>
+
+            <div class="form-group">
+                <label for="editBio">Descrição (Bio)</label>
+                <textarea id="editBio" placeholder="Conte um pouco sobre você..." maxlength="160" rows="3"></textarea>
+                <span class="form-hint" id="hintBio">0/160</span>
+            </div>
+
+            <div class="form-group">
+                <label for="editCidade">Cidade</label>
+                <input type="text" id="editCidade" placeholder="Sua cidade" maxlength="50">
+            </div>
+
+            <div class="form-group">
+                <label for="editProfissao">Profissão</label>
+                <input type="text" id="editProfissao" placeholder="Sua profissão" maxlength="50">
+            </div>
+
+            <div class="form-group">
+                <label for="editWebsite">Website</label>
+                <input type="url" id="editWebsite" placeholder="https://seu-website.com" maxlength="100">
+            </div>
+
+            <div class="form-buttons">
+                <button type="button" class="btn-cancelar" id="btnCancelarEditar">Cancelar</button>
+                <button type="submit" class="btn-salvar">Salvar Alterações</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+    <footer class="floating-footer">
+        <div class="footer-content">
+            <div class="footer-logo-area">
+                <img src="../Imagens/Geral/Victoria.png" alt="Logo Victoria" class="footer-logo">
+                <p>Transformando a forma como você monitora e economiza água com tecnologia inteligente. Desenvolvido
+                    como projeto de conclusão de
+                    curso.</p>
+            </div>
+
+            <div class="footer-links">
+                <h4>Recursos</h4>
+                <ul>
+                    <li><a href="Documentação.html" style="text-decoration: none;">Documentação</a></li>
+                    <li><a href="Performance.html" style="text-decoration: none;">Telemetria Real-time</a></li>
+                    <li><a href="Status.html" style="text-decoration: none;">Status do Sistema</a></li>
+                    <li><a href="Privacidade.html" style="text-decoration: none;">Termos e Ética</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-contact">
+                <h4>Conexão Técnica</h4>
+                <p><i class="fa-solid fa-envelope"></i> Qualqueremail@Gmail.com</p>
+                <p><i class="fa-solid fa-location-dot"></i> Etec Lauro Gomes</p>
+                <p><i class="fa-solid fa-code-branch"></i> Versão do Sistema: v0.0.3 Alpha</p>
+            </div>
+
+            <div class="footer-social">
+                <h4>Presença Digital</h4>
+                <div class="social-icons">
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <a id="backtotop" href="#top" aria-label="Voltar ao topo">
+            <i class="fas fa-chevron-up"></i>
+        </a>
+
+        <div class="footer-bottom">
+            <p>&copy; 2026 Projeto Victoria. Todos os direitos reservados à equipe de desenvolvimento.</p>
+        </div>
+    </footer>
+
+    <script src="../JS/Auth.js"></script>
+    <script src="../JS/Geral.js"></script>
+    <script src="../JS/Perfil.js"></script>
+    
+    <div id="modal-crop-foto" class="modal-overlay" style="display: none;">
+        <div class="modal-content crop-modal">
+            <h2>Atualizar Foto de Perfil</h2>
+
+            <div id="dropzone-avatar" class="dropzone">
+                <i class="fa-solid fa-cloud-arrow-up"></i>
+                <p>Arraste uma imagem, <strong>Cole (Ctrl+V)</strong> ou clique aqui</p>
+                <input type="file" id="input-foto-oculto" accept="image/*" style="display: none;">
+            </div>
+
+            <div class="cropper-container" style="display: none; width: 100%; max-height: 400px; margin-top: 15px;">
+                <img id="imagem-para-cortar" src="" style="max-width: 100%;">
+            </div>
+
+            <div class="modal-actions" style="margin-top: 20px;">
+                <button id="btn-cancelar-crop" class="btn-secondary">Cancelar</button>
+                <button id="btn-salvar-crop" class="btn-primary" style="display: none;">Salvar Foto</button>
+            </div>
+        </div>
+    </div>
+
+<div id="modalWallpaper" class="modal-overlay" style="display: none;">
+    <div class="modal-content crop-modal">
+        <div class="modal-header-crop">
+            <h2><i class="fas fa-image"></i> Alterar Banner</h2>
+            <button class="btn-fechar-modal-x" onclick="fecharModalWallpaper()">&times;</button>
+        </div>
+
+        <div id="dropzoneWallpaper" class="dropzone">
+            <i class="fas fa-cloud-upload-alt"></i>
+            <p>Arraste uma imagem, <strong>Cole (Ctrl+V)</strong> ou clique aqui</p>
+            <input type="file" id="fileWallpaper" accept="image/*" style="display: none;">
+        </div> <br> 
+
+        <div id="containerCropperWallpaper" style="display:none; max-height: 400px;">
+            <img id="imagem-para-cortar-wallpaper" src="" style="display: block; max-width: 100%;">
+        </div>
+
+        <div style="text-align: center; margin: 15px 0; color: #999; font-weight: bold;">OU</div>
+
+        <div class="form-group" style="margin-bottom: 20px;">
+            <label style="display: block; margin-bottom: 8px; font-weight: 600;">Cole a URL da imagem:</label>
+            <input type="text" id="urlWallpaper" placeholder="https://exemplo.com/imagem.jpg"
+                style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px;">
+        </div>
+
+        <div class="modal-actions">
+            <button class="btn-secondary" onclick="fecharModalWallpaper()">Cancelar</button>
+            <button class="btn-primary" id="btnSalvarWallpaper">Salvar Banner</button>
+        </div>
+    </div>
+</div>
+</body>
+
+</html>
+
+
+CSS:
+
+.nav-wrapper {
+    background: rgba(255, 255, 255, 0.08) !important;
+    backdrop-filter: blur(15px) !important;
+    -webkit-backdrop-filter: blur(15px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1) !important;
+    top: 20px;
+}
+
+.nav-link {
+    color: #ffffff !important;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.info-box-destaque {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(8px);
+    padding: 15px 25px;
+    border-radius: 12px;
+    border-left: 5px solid #598392;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    display: inline-block;
+    margin-bottom: 10px;
+}
+
+.info-box-destaque .perfil-nome {
+    color: #124559 !important;
+    margin: 0;
+    font-size: 1.8rem;
+}
+
+.info-box-destaque .perfil-username,
+.info-box-destaque .perfil-email-full {
+    color: #598392 !important;
+    display: none;
+    font-weight: 500;
+}
+
+.upload-dropzone {
+    border: 2px dashed #598392;
+    border-radius: 12px;
+    padding: 40px 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: rgba(89, 131, 146, 0.05);
+    color: #598392;
+}
+
+.upload-dropzone.drag-over {
+    background: rgba(89, 131, 146, 0.2);
+    transform: scale(1.02);
+    border-color: #124559;
+}
+
+.upload-dropzone i {
+    font-size: 3rem;
+    margin-bottom: 10px;
+}
+
+.divider {
+    text-align: center;
+    margin: 20px 0;
+    position: relative;
+}
+
+.divider::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 100%;
+    height: 1px;
+    background: #ddd;
+    z-index: 1;
+}
+
+.divider span {
+    background: white;
+    padding: 0 15px;
+    position: relative;
+    z-index: 2;
+    color: #999;
+    font-size: 0.8rem;
+}
+
+.meu-container-cropper {
+    width: 100%;
+    min-height: 300px;
+    margin-top: 15px;
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    display: none;
+}
+
+.modal-overlay.ativo,
+.modal-editar.ativo,
+#modal-crop-foto.ativo,
+#modalWallpaper.ativo {
+    display: flex !important;
+}
+
+#imagem-para-cortar-wallpaper {
+    display: block;
+    max-width: 100%;
+}
+
+.nav-icon,
+.chevron-icon {
+    color: rgba(255, 255, 255, 0.8) !important;
+}
+
+.nav-wrapper:hover {
+    background: rgba(255, 255, 255, 0.12) !important;
+}
+
+.perfil-container-hero {
+    width: 100%;
+    animation: fadeIn 0.5s ease;
+}
+
+.perfil-banner,
+.perfil-avatar img {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: high-quality;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.perfil-hero {
+    position: relative;
+    width: 100%;
+    height: 500px;
+    background: var(--dark-teal);
+    overflow: visible;
+    margin-bottom: 120px;
+}
+
+.perfil-banner {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    position: relative;
+}
+
+.perfil-banner::before {
+    display: none !important;
+}
+
+.banner-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, transparent, rgba(1, 22, 30, 0.4));
+    z-index: 1;
+}
+
+.btn-editar-banner {
+    position: absolute;
+    bottom: 30px;
+    right: 40px;
+    z-index: 50;
+    background: rgba(89, 131, 146, 0.85);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    color: white;
+    padding: 11px 22px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+.btn-editar-banner:hover {
+    background: rgba(89, 131, 146, 0.95);
+    border-color: rgba(255, 255, 255, 0.4);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
+}
+
+.btn-editar-banner:active {
+    transform: translateY(-1px);
+}
+
+
+.perfil-header-content {
+    position: absolute;
+    bottom: -80px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 1200px;
+    padding: 0 40px;
+    display: flex;
+    align-items: flex-end;
+    gap: 30px;
+    z-index: 10;
+}
+
+.perfil-avatar-section {
+    position: relative;
+    flex-shrink: 0;
+}
+
+.perfil-avatar {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--dark-teal), var(--air-force-blue));
+    border: 6px solid var(--white);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    font-weight: 800;
+    color: white;
+}
+
+.perfil-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.btn-editar-avatar {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: rgba(89, 131, 146, 0.9);
+    backdrop-filter: blur(12px);
+    border: 2px solid white;
+    color: white;
+    font-size: 1.1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+}
+
+.btn-editar-avatar:hover {
+    background: rgba(89, 131, 146, 1);
+    transform: scale(1.12);
+}
+
+.btn-editar-avatar:active {
+    transform: scale(1.08);
+}
+
+
+.perfil-info-hero {
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding-bottom: 20px;
+}
+
+.info-text h1 {
+    font-size: 2.4rem;
+    font-weight: 800;
+    color: white !important;
+    margin: 0;
+    line-height: 1.15;
+    letter-spacing: -0.5px;
+}
+
+.user-identifiers {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 10px;
+}
+
+.perfil-username {
+    display: none;
+}
+
+.separator {
+    color: rgba(255, 255, 255, 0.5);
+    font-weight: 300;
+}
+
+.perfil-email-full {
+    display: inline;
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.9) !important;
+    font-weight: 500;
+}
+
+.btn-editar-perfil {
+    background: rgba(255, 255, 255, 0.80);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    color: var(--dark-teal);
+    padding: 11px 26px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    white-space: nowrap;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.btn-editar-perfil:hover {
+    background: rgba(255, 255, 255, 0.18);
+    border-color: rgba(255, 255, 255, 0.4);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
+}
+
+.btn-editar-perfil:active {
+    transform: translateY(-1px);
+}
+
+
+.perfil-dashboard-grid {
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto 50px;
+    padding: 0 40px;
+    align-items: start;
+}
+
+.perfil-main-content {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+}
+
+
+.perfil-bio {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: var(--foreground);
+    margin: 0;
+    padding: 28px;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 18px;
+    transition: all 0.3s ease;
+}
+
+.perfil-bio:hover {
+    background: rgba(255, 255, 255, 0.55);
+    transform: translateY(-2px);
+}
+
+
+.perfil-meta-inline {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    padding: 28px;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 18px;
+    transition: all 0.3s ease;
+}
+
+.perfil-meta-inline:hover {
+    background: rgba(255, 255, 255, 0.55);
+    transform: translateY(-2px);
+}
+
+.meta-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--foreground);
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+.meta-item i {
+    color: var(--primary);
+    font-size: 1.15rem;
+    min-width: 20px;
+}
+
+.meta-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.meta-link:hover {
+    opacity: 0.8;
+    text-decoration: underline;
+}
+
+
+.stats-grid-inner {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    padding: 28px;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 18px;
+    transition: all 0.3s ease;
+}
+
+.stats-grid-inner:hover {
+    background: rgba(255, 255, 255, 0.55);
+}
+
+.stat-card {
+    background: rgba(255, 255, 255, 0.5);
+    padding: 20px;
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    transition: all 0.3s ease;
+    animation: slideInUp 0.5s ease backwards;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.6);
+}
+
+.stat-card:active {
+    transform: translateY(-2px);
+}
+
+.stat-card i {
+    font-size: 1.8rem;
+    color: var(--primary);
+}
+
+.stat-info {
+    width: 100%;
+}
+
+.stat-info p {
+    margin: 0;
+    font-size: 0.85rem;
+    color: var(--muted-foreground);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.stat-info b {
+    display: block;
+    font-size: 1.4rem;
+    color: var(--foreground);
+    margin-top: 6px;
+    font-weight: 700;
+}
+
+.arduino-full {
+    grid-column: 1 / -1;
+}
+
+.stat-card:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.stat-card:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.stat-card:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+.stat-card:nth-child(4) {
+    animation-delay: 0.4s;
+}
+
+.stat-card:nth-child(5) {
+    animation-delay: 0.5s;
+}
+
+
+.perfil-activity-sidebar {
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 18px;
+    padding: 28px;
+    height: fit-content;
+    position: static;
+    transition: all 0.3s ease;
+}
+
+.perfil-activity-sidebar:hover {
+    background: rgba(255, 255, 255, 0.55);
+}
+
+.sidebar-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid rgba(89, 131, 146, 0.2);
+}
+
+.sidebar-header i {
+    font-size: 1.3rem;
+    color: var(--primary);
+}
+
+.sidebar-header h2 {
+    margin: 0;
+    font-size: 1.15rem;
+    color: var(--foreground);
+    font-weight: 700;
+    letter-spacing: -0.3px;
+}
+
+.activity-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.activity-item {
+    display: flex;
+    gap: 12px;
+    padding: 14px;
+    background: rgba(255, 255, 255, 0.04);
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(89, 131, 146, 0.1);
+}
+
+.activity-item:hover {
+    background: rgba(255, 255, 255, 0.07);
+    border-color: rgba(89, 131, 146, 0.2);
+}
+
+.activity-icon {
+    flex-shrink: 0;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(89, 131, 146, 0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary);
+    font-size: 0.95rem;
+}
+
+.activity-content {
+    flex: 1;
+}
+
+.activity-title {
+    margin: 0;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--foreground);
+}
+
+.activity-time {
+    margin: 4px 0 0;
+    font-size: 0.8rem;
+    color: var(--muted-foreground);
+}
+
+
+.modal-editar {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.55);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(4px);
+}
+
+.modal-editar.ativo {
+    display: flex;
+}
+
+.modal-content {
+    background: rgba(255, 255, 255, 0.98);
+    border-radius: 16px;
+    padding: 32px;
+    max-width: 500px;
+    width: 90%;
+    z-index: 1001;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.25);
+    animation: slideUp 0.3s ease;
+    border: 1px solid rgba(89, 131, 146, 0.1);
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 28px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+}
+
+.modal-header h2 {
+    margin: 0;
+    font-size: 1.4rem;
+    color: var(--foreground);
+    font-weight: 700;
+}
+
+.btn-fechar-modal {
+    background: none;
+    border: none;
+    font-size: 1.4rem;
+    color: var(--muted-foreground);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 0;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-fechar-modal:hover {
+    color: var(--foreground);
+    transform: scale(1.15);
+}
+
+.btn-fechar-modal:active {
+    transform: scale(1.05);
+}
+
+
+.form-editar {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-group label {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--foreground);
+}
+
+.form-group input,
+.form-group textarea {
+    padding: 12px 14px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    font-size: 1rem;
+    font-family: 'Montserrat', sans-serif;
+    background: var(--input);
+    color: var(--foreground);
+    transition: all 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(89, 131, 146, 0.1);
+}
+
+.form-hint {
+    font-size: 0.8rem;
+    color: var(--muted-foreground);
+    text-align: right;
+}
+
+.form-buttons {
+    display: flex;
+    gap: 12px;
+    margin-top: 24px;
+}
+
+.btn-salvar {
+    background: #124559 !important;
+    color: white !important;
+    border-radius: 12px !important;
+    height: 50px;
+    font-size: 1rem;
+    letter-spacing: 0.5px;
+}
+
+.btn-cancelar {
+    background: #f1f5f9 !important;
+    color: #475569 !important;
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 12px !important;
+    height: 50px;
+}
+
+.btn-cancelar:hover {
+    opacity: 0.85;
+    transform: translateY(-2px);
+}
+
+.btn-cancelar:active {
+    transform: translateY(0);
+}
+
+.btn-salvar {
+    background: var(--primary);
+    color: white;
+}
+
+.btn-salvar:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(89, 131, 146, 0.3);
+}
+
+.btn-salvar:active {
+    transform: translateY(0);
+}
+
+
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.55);
+    z-index: 2000;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    backdrop-filter: blur(4px);
+}
+
+.modal-overlay.ativo {
+    display: flex;
+}
+
+.crop-modal {
+    background: var(--card);
+    border-radius: 16px;
+    padding: 32px;
+    max-width: 600px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(89, 131, 146, 0.1);
+}
+
+.modal-header-crop {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 28px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+}
+
+.modal-header-crop h2 {
+    margin: 0;
+    font-size: 1.4rem;
+    color: var(--foreground);
+    font-weight: 700;
+}
+
+.btn-fechar-modal-x {
+    background: none;
+    border: none;
+    font-size: 1.4rem;
+    color: var(--muted-foreground);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 0;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-fechar-modal-x:hover {
+    color: var(--foreground);
+    transform: scale(1.15);
+}
+
+.btn-fechar-modal-x:active {
+    transform: scale(1.05);
+}
+
+
+@media (max-width: 1024px) {
+    .perfil-dashboard-grid {
+        grid-template-columns: 1fr;
+        padding: 0 30px 60px;
+        gap: 28px;
+    }
+
+    .perfil-activity-sidebar {
+        position: static;
+        top: auto;
+    }
+
+    .perfil-header-content {
+        padding: 0 30px;
+    }
+}
+
+@media (max-width: 768px) {
+    .perfil-hero {
+        height: 340px;
+        margin-bottom: 100px;
+    }
+
+    .perfil-header-content {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        bottom: -110px;
+        padding: 0 20px;
+        gap: 20px;
+    }
+
+    .perfil-avatar {
+        width: 140px;
+        height: 140px;
+        font-size: 3rem;
+    }
+
+    .perfil-info-hero {
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .info-text h1 {
+        font-size: 1.8rem;
+    }
+
+    .user-identifiers {
+        justify-content: center;
+    }
+
+    .perfil-dashboard-grid {
+        padding: 0 20px 40px;
+        gap: 24px;
+    }
+
+    .stats-grid-inner {
+        grid-template-columns: 1fr;
+    }
+
+    .perfil-meta-inline {
+        gap: 16px;
+    }
+
+    .modal-content,
+    .crop-modal {
+        padding: 24px;
+        max-width: 90%;
+    }
+
+    .btn-editar-banner {
+        bottom: 15px;
+        right: 15px;
+        padding: 9px 18px;
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .perfil-hero {
+        height: 280px;
+        margin-bottom: 80px;
+    }
+
+    .perfil-header-content {
+        bottom: -90px;
+        padding: 0 15px;
+    }
+
+    .perfil-avatar {
+        width: 120px;
+        height: 120px;
+        font-size: 2.5rem;
+    }
+
+    .info-text h1 {
+        font-size: 1.5rem;
+    }
+
+    .perfil-dashboard-grid {
+        padding: 0 15px 30px;
+        gap: 20px;
+    }
+
+    .perfil-bio,
+    .perfil-meta-inline,
+    .stats-grid-inner {
+        padding: 20px;
+    }
+
+    .meta-item {
+        font-size: 0.85rem;
+    }
+
+    .stat-info b {
+        font-size: 1.2rem;
+    }
+
+    .perfil-activity-sidebar {
+        padding: 20px;
+    }
+
+    .modal-content,
+    .crop-modal {
+        padding: 20px;
+    }
+
+    .dropzone {
+        padding: 24px;
+    }
+
+    .dropzone i {
+        font-size: 2rem;
+    }
+
+    .user-identifiers {
+        gap: 8px;
+    }
+
+    .perfil-username,
+    .perfil-email-full {
+        font-size: 0.9rem;
+    }
+}
+
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+
+.form-editar {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-group label {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--foreground);
+    letter-spacing: -0.3px;
+}
+
+.form-group input,
+.form-group textarea {
+    padding: 12px 16px;
+    border: 1px solid rgba(89, 131, 146, 0.2);
+    border-radius: 10px;
+    font-size: 1rem;
+    font-family: 'Montserrat', sans-serif;
+    background: rgba(255, 255, 255, 0.4);
+    color: var(--foreground);
+    transition: all 0.3s ease;
+    backdrop-filter: blur(8px);
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: rgba(0, 0, 0, 0.4);
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--primary);
+    background: rgba(255, 255, 255, 0.6);
+    box-shadow: 0 0 0 3px rgba(89, 131, 146, 0.15);
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 100px;
+    max-height: 200px;
+}
+
+.form-hint {
+    font-size: 0.8rem;
+    color: var(--muted-foreground);
+    text-align: right;
+    font-weight: 500;
+}
+
+.form-buttons {
+    display: flex;
+    gap: 12px;
+    margin-top: 28px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(89, 131, 146, 0.1);
+}
+
+.btn-cancelar,
+.btn-salvar {
+    flex: 1;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 10px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.btn-cancelar {
+    background: rgba(255, 255, 255, 0.2);
+    color: var(--foreground);
+    border: 1px solid rgba(89, 131, 146, 0.2);
+}
+
+.btn-cancelar:hover {
+    background: rgba(255, 255, 255, 0.3);
+    border-color: rgba(89, 131, 146, 0.3);
+    transform: translateY(-2px);
+}
+
+.btn-cancelar:active {
+    transform: translateY(0);
+}
+
+.btn-salvar {
+    background: linear-gradient(135deg, var(--primary), rgba(89, 131, 146, 0.8));
+    color: white;
+    box-shadow: 0 6px 20px rgba(89, 131, 146, 0.25);
+}
+
+.btn-salvar:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px rgba(89, 131, 146, 0.35);
+}
+
+.btn-salvar:active {
+    transform: translateY(0);
+}
+
+
+@media (max-width: 768px) {
+
+    .form-group input,
+    .form-group textarea {
+        font-size: 16px;
+    }
+
+    .form-buttons {
+        flex-direction: column;
+    }
+
+    .btn-cancelar,
+    .btn-salvar {
+        width: 100%;
+    }
+}
+
+
+@media (max-width: 768px) {
+
+    .form-group input,
+    .form-group textarea {
+        font-size: 16px;
+    }
+
+    .form-buttons {
+        flex-direction: column;
+    }
+
+    .btn-cancelar,
+    .btn-salvar {
+        width: 100%;
+    }
+}
+
+JS:
+
+document.addEventListener('DOMContentLoaded', () => {
+
+    if (!Auth.isAuthenticated()) {
+        Swal.fire({
+            title: 'Acesso Restrito',
+            html: '<p style="color: #333; margin-top: 10px;">Você precisa estar logado para acessar seu perfil.</p>',
+            icon: 'warning',
+            iconColor: '#598392',
+            background: 'rgba(255, 255, 255, 0.95)',
+            backdrop: 'rgba(0, 0, 0, 0.5)',
+            confirmButtonColor: '#124559',
+            confirmButtonText: 'Ir para Login',
+            allowOutsideClick: false,
+            allowEscapeKey: false,
+            willClose: () => {
+                window.location.href = 'Login.html';
+            }
+        });
+        return;
+    }
+
+    const perfilNome = document.getElementById('perfilNome');
+    const perfilUsername = document.getElementById('perfilUsername');
+    const perfilBio = document.getElementById('perfilBio');
+    const perfilCidade = document.getElementById('perfilCidade');
+    const perfilProfissao = document.getElementById('perfilProfissao');
+    const perfilWebsite = document.getElementById('perfilWebsite');
+    const perfilDataCadastro = document.getElementById('perfilDataCadastro');
+    const perfilAvatar = document.getElementById('perfilAvatar');
+    const perfilBanner = document.getElementById('perfilBanner');
+
+    const btnEditarPerfil = document.getElementById('btnEditarPerfil');
+    const btnEditarAvatar = document.getElementById('btnEditarAvatar');
+    const btnEditarBanner = document.getElementById('btnEditarBanner');
+    const btnFecharModal = document.getElementById('btnFecharModal');
+    const btnCancelarEditar = document.getElementById('btnCancelarEditar');
+    const btnSalvarWallpaper = document.getElementById('btnSalvarWallpaper');
+
+    const modalEditar = document.getElementById('modalEditar');
+    const modalCrop = document.getElementById('modal-crop-foto');
+    const modalWallpaper = document.getElementById('modalWallpaper');
+
+    const formEditar = document.getElementById('formEditar');
+    const editNome = document.getElementById('editNome');
+    const editBio = document.getElementById('editBio');
+    const editCidade = document.getElementById('editCidade');
+    const editProfissao = document.getElementById('editProfissao');
+    const editWebsite = document.getElementById('editWebsite');
+    const hintNome = document.getElementById('hintNome');
+    const hintBio = document.getElementById('hintBio');
+
+    const statConsumo = document.getElementById('statConsumo');
+    const statEconomia = document.getElementById('statEconomia');
+    const statEficiencia = document.getElementById('statEficiencia');
+    const statPontuacao = document.getElementById('statPontuacao');
+
+    let cropperWallpaper = null;
+    const imageElementWallpaper = document.getElementById('imagem-para-cortar-wallpaper');
+    const cropperContainerWallpaper = document.getElementById('containerCropperWallpaper');
+
+    if (btnEditarBanner) {
+        btnEditarBanner.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (modalWallpaper) modalWallpaper.classList.add('ativo');
+        });
+    }
+
+    window.fecharModalWallpaper = function () {
+        if (modalWallpaper) {
+            modalWallpaper.classList.remove('ativo');
+            document.getElementById('urlWallpaper').value = '';
+
+            if (cropperWallpaper) {
+                cropperWallpaper.destroy();
+                cropperWallpaper = null;
+            }
+            if (cropperContainerWallpaper) {
+                cropperContainerWallpaper.style.display = 'none';
+            }
+        }
+    };
+
+    function carregarImagemNoCropper(source) {
+        if (cropperWallpaper) {
+            cropperWallpaper.destroy();
+        }
+
+        imageElementWallpaper.src = source;
+        if (cropperContainerWallpaper) {
+            cropperContainerWallpaper.style.display = 'block';
+        }
+
+        cropperWallpaper = new Cropper(imageElementWallpaper, {
+            aspectRatio: 16 / 9,
+            viewMode: 2,
+            background: false,
+            ready() {
+                console.log("Cropper de Wallpaper pronto e dimensionado!");
+            }
+        });
+    }
+
+    function processarArquivoWallpaper(file) {
+        if (!file.type.startsWith('image/')) {
+            Swal.fire('Erro', 'O arquivo precisa ser uma imagem!', 'error');
+            return;
+        }
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            carregarImagemNoCropper(e.target.result);
+        };
+        reader.readAsDataURL(file);
+    }
+
+    document.getElementById('urlWallpaper')?.addEventListener('change', function (e) {
+        if (e.target.value) carregarImagemNoCropper(e.target.value);
+    });
+
+    document.getElementById('fileWallpaper')?.addEventListener('change', function (e) {
+        const file = e.target.files[0];
+        if (file) processarArquivoWallpaper(file);
+    });
+
+    const dropzoneWallpaper = document.getElementById('dropzoneWallpaper');
+    if (dropzoneWallpaper) {
+        dropzoneWallpaper.addEventListener('click', () => document.getElementById('fileWallpaper').click());
+
+        dropzoneWallpaper.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            dropzoneWallpaper.style.borderColor = '#124559';
+            dropzoneWallpaper.style.background = 'rgba(89, 131, 146, 0.1)';
+        });
+
+        dropzoneWallpaper.addEventListener('dragleave', () => {
+            dropzoneWallpaper.style.borderColor = '#598392';
+            dropzoneWallpaper.style.background = '';
+        });
+
+        dropzoneWallpaper.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dropzoneWallpaper.style.borderColor = '#598392';
+            dropzoneWallpaper.style.background = '';
+            const file = e.dataTransfer.files[0];
+            if (file) processarArquivoWallpaper(file);
+        });
+    }
+
+    if (btnSalvarWallpaper) {
+        btnSalvarWallpaper.addEventListener('click', () => {
+            let finalData = null;
+
+            if (cropperWallpaper) {
+
+                const canvas = cropperWallpaper.getCroppedCanvas({
+                    width: 1920,
+                    height: 1080, // Mantém a proporção 3:1 ou 16:9 que você preferir
+                    imageSmoothingEnabled: true,
+                    imageSmoothingQuality: 'high',
+                });
+
+                finalData = canvas.toDataURL('image/jpeg', 1);
+            } else {
+                finalData = document.getElementById('urlWallpaper').value.trim();
+            }
+
+            if (!finalData) {
+                Swal.fire('Aviso', 'Selecione uma imagem ou cole uma URL primeiro.', 'warning');
+                return;
+            }
+
+            const userData = Auth.getCurrentUser();
+            if (userData) {
+                userData.wallpaper = finalData;
+                localStorage.setItem('Victoria_user', JSON.stringify(userData));
+
+                const users = JSON.parse(localStorage.getItem('Victoria_users') || '[]');
+                const index = users.findIndex(u => u.id === userData.id);
+                if (index !== -1) {
+                    users[index].wallpaper = finalData;
+                    localStorage.setItem('Victoria_users', JSON.stringify(users));
+                }
+
+                if (perfilBanner) {
+                    perfilBanner.style.backgroundImage = `url('${finalData}')`;
+                }
+
+                fecharModalWallpaper();
+                Swal.fire({
+                    title: 'Sucesso',
+                    text: 'Seu banner foi atualizado!',
+                    icon: 'success',
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3000
+                });
+            }
+        });
+    }
+
+    document.addEventListener('paste', (e) => {
+        const items = e.clipboardData?.items;
+        if (!items) return;
+
+        for (let item of items) {
+            if (item.type.startsWith('image/')) {
+                const blob = item.getAsFile();
+
+                if (modalWallpaper?.classList.contains('ativo')) {
+                    processarArquivoWallpaper(blob);
+                } else if (modalCrop?.style.display === 'flex' || modalCrop?.classList.contains('ativo')) {
+                    if (window.processarFotoPerfil) window.processarFotoPerfil(blob);
+                }
+                break;
+            }
+        }
+    });
+
+    function carregarWallpaper() {
+        const userData = Auth.getCurrentUser();
+        if (userData && userData.wallpaper && perfilBanner) {
+            perfilBanner.style.backgroundImage = `url('${userData.wallpaper}')`;
+        }
+    }
+
+   function carregarDadosUsuario() {
+    const userData = Auth.getCurrentUser();
+    if (!userData) {
+        window.location.href = 'Login.html';
+        return;
+    }
+
+    console.log('Dados do usuário carregados:', userData);
+
+    const nomeCompleto = userData.nome || 'Usuário';
+    if (perfilNome) perfilNome.textContent = nomeCompleto;
+
+    const username = '@' + nomeCompleto.toLowerCase().replace(/\s+/g, '');
+    if (perfilUsername) perfilUsername.textContent = username;
+
+    const emailEl = document.getElementById('perfilEmail') || document.querySelector('.user-email');
+    if (emailEl) {
+        emailEl.textContent = userData.email; 
+        emailEl.style.display = 'block';
+    }
+
+    if (perfilBio) perfilBio.textContent = userData.bio || 'Adicione uma descrição ao seu perfil';
+    if (perfilCidade) perfilCidade.textContent = userData.cidade || 'Cidade não informada';
+    if (perfilProfissao) perfilProfissao.textContent = userData.profissao || 'Profissão não informada';
+
+    if (perfilWebsite) {
+        if (userData.website && userData.website.trim()) {
+            perfilWebsite.href = userData.website;
+            perfilWebsite.textContent = userData.website;
+            perfilWebsite.style.display = 'inline-flex';
+        } else {
+            perfilWebsite.style.display = 'none';
+        }
+    }
+
+    if (perfilDataCadastro) {
+        if (userData.dataCadastro) {
+            const data = new Date(userData.dataCadastro);
+            const mes = data.toLocaleDateString('pt-BR', { month: 'long' });
+            const ano = data.getFullYear();
+            perfilDataCadastro.textContent = `Membro desde ${mes} de ${ano}`;
+        } else {
+            perfilDataCadastro.textContent = 'Data não disponível';
+        }
+    }
+
+    atualizarAvatar(userData);
+    carregarEstatisticas(userData);
+    carregarAtividade(userData);
+}
+
+
+    function atualizarAvatar(userData) {
+        const temFoto = userData.avatar && userData.avatar.length > 50;
+
+        if (temFoto) {
+            if (perfilAvatar) perfilAvatar.innerHTML = `<img src="${userData.avatar}" alt="Perfil">`;
+        } else {
+            if (perfilAvatar) {
+                const inicial = userData.nome ? userData.nome.charAt(0).toUpperCase() : '?';
+                const corFundo = gerarCorAvatarSegura(userData.email);
+                perfilAvatar.innerHTML = `
+            <div style="
+                background: ${corFundo};
+                color: white;
+                width: 100%;
+                height: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 50%;
+                font-weight: bold;
+                font-size: 3.5rem;
+                font-family: 'Montserrat', sans-serif;
+            ">
+                ${inicial}
+            </div>
+        `;
+            }
+        }
+    }
+
+
+    function gerarCorAvatarSegura(email) {
+        let hash = 0;
+        const str = email || "default";
+        for (let i = 0; i < str.length; i++) {
+            hash = str.charCodeAt(i) + ((hash << 5) - hash);
+        }
+        const h = Math.abs(hash % 360);
+        const s = 65;
+        const l = 40;
+        return `hsl(${h}, ${s}%, ${l}%)`;
+    }
+
+
+    function carregarEstatisticas(userData) {
+        const consumo = userData.consumoMensal || 0;
+        const economia = userData.economia || 0;
+        const eficiencia = userData.eficiencia || 0;
+        const pontuacao = userData.pontuacao || 0;
+
+        if (statConsumo) statConsumo.textContent = `${consumo} L`;
+        if (statEconomia) statEconomia.textContent = `${economia} L`;
+        if (statEficiencia) statEficiencia.textContent = `${eficiencia}%`;
+        if (statPontuacao) statPontuacao.textContent = `${pontuacao} pts`;
+
+        carregarStatusArduino();
+    }
+
+
+    function carregarStatusArduino() {
+        let statusArduino = document.getElementById('statusArduino');
+        if (!statusArduino) {
+            const statsContainer = document.querySelector('.perfil-stats');
+            if (statsContainer) {
+                statusArduino = document.createElement('div');
+                statusArduino.id = 'statusArduino';
+                statusArduino.className = 'stat-card';
+                statusArduino.style.gridColumn = 'span 1';
+                statsContainer.appendChild(statusArduino);
+            }
+        }
+
+        if (!statusArduino) return;
+
+        const isOnline = false;
+        const statusText = isOnline ? 'Online' : 'Offline';
+        const statusColor = isOnline ? '#27ae60' : '#e74c3c';
+        const statusIcon = isOnline ? 'fa-check-circle' : 'fa-times-circle';
+
+        statusArduino.innerHTML = `
+        <div class="stat-icon" style="color: ${statusColor};">
+            <i class="fas ${statusIcon}"></i>
+        </div>
+        <div class="stat-content">
+            <p class="stat-label">Arduino</p>
+            <p class="stat-value" style="color: ${statusColor};">${statusText}</p>
+        </div>
+    `;
+    }
+
+    function carregarAtividade(userData) {
+        const activityList = document.getElementById('activityList');
+        if (!activityList) return;
+
+        activityList.innerHTML = '';
+
+        const dataCadastro = userData.dataCadastro ? new Date(userData.dataCadastro) : new Date();
+        const hoje = new Date();
+        const diffMs = hoje - dataCadastro;
+        const diffDias = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+
+        let tempoDecorrido = 'Hoje';
+        if (diffDias === 1) tempoDecorrido = 'Ontem';
+        else if (diffDias > 1 && diffDias < 7) tempoDecorrido = `${diffDias} dias atrás`;
+        else if (diffDias >= 7) tempoDecorrido = `${Math.floor(diffDias / 7)} semanas atrás`;
+
+        const activityHTML = `
+            <div class="activity-item">
+                <div class="activity-icon">
+                    <i class="fas fa-user-plus"></i>
+                </div>
+                <div class="activity-content">
+                    <p class="activity-title">Conta criada</p>
+                    <p class="activity-time">${tempoDecorrido}</p>
+                </div>
+            </div>
+        `;
+
+        activityList.innerHTML = activityHTML;
+    }
+
+
+    if (btnEditarPerfil) {
+        btnEditarPerfil.addEventListener('click', () => {
+            const userData = Auth.getCurrentUser();
+            if (!userData) return;
+
+            editNome.value = userData.nome || '';
+            editBio.value = userData.bio || '';
+            editCidade.value = userData.cidade || '';
+            editProfissao.value = userData.profissao || '';
+            editWebsite.value = userData.website || '';
+
+            atualizarHint(editNome, hintNome, 50);
+            atualizarHint(editBio, hintBio, 160);
+
+            modalEditar.classList.add('ativo');
+        });
+    }
+
+
+    if (btnFecharModal) {
+        btnFecharModal.addEventListener('click', () => {
+            modalEditar.classList.remove('ativo');
+        });
+    }
+
+    if (btnCancelarEditar) {
+        btnCancelarEditar.addEventListener('click', () => {
+            modalEditar.classList.remove('ativo');
+        });
+    }
+
+    modalEditar.addEventListener('click', (e) => {
+        if (e.target === modalEditar) {
+            modalEditar.classList.remove('ativo');
+        }
+    });
+
+
+    function atualizarHint(input, hint, max) {
+        hint.textContent = `${input.value.length}/${max}`;
+    }
+
+    if (editNome) {
+        editNome.addEventListener('input', () => {
+            atualizarHint(editNome, hintNome, 50);
+        });
+    }
+
+    if (editBio) {
+        editBio.addEventListener('input', () => {
+            atualizarHint(editBio, hintBio, 160);
+        });
+    }
+
+
+    if (formEditar) {
+        formEditar.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            if (!editNome.value.trim()) {
+                Swal.fire('Erro', 'Nome é obrigatório.', 'error');
+                return;
+            }
+
+            if (editNome.value.trim().length < 3) {
+                Swal.fire('Erro', 'Nome deve ter no mínimo 3 caracteres.', 'error');
+                return;
+            }
+
+            if (editWebsite.value && !validarURL(editWebsite.value)) {
+                Swal.fire('Erro', 'Website deve ser uma URL válida.', 'error');
+                return;
+            }
+
+            try {
+                const result = Auth.updateProfile({
+                    nome: editNome.value.trim(),
+                    bio: editBio.value.trim(),
+                    cidade: editCidade.value.trim(),
+                    profissao: editProfissao.value.trim(),
+                    website: editWebsite.value.trim()
+                });
+
+                if (result.success) {
+                    Swal.fire('Sucesso', 'Perfil atualizado com sucesso!', 'success');
+                    carregarDadosUsuario();
+                    modalEditar.classList.remove('ativo');
+                } else {
+                    Swal.fire('Erro', result.message, 'error');
+                }
+            } catch (err) {
+                console.error('Erro ao atualizar perfil:', err);
+                Swal.fire('Erro', 'Falha ao atualizar perfil.', 'error');
+            }
+        });
+    }
+
+
+    function validarURL(url) {
+        try {
+            new URL(url);
+            return true;
+        } catch (err) {
+            return false;
+        }
+    }
+
+
+
+    if (btnEditarAvatar) {
+        btnEditarAvatar.addEventListener('click', () => {
+            if (modalCrop) {
+                modalCrop.style.display = 'flex';
+            }
+        });
+    }
+
+    const btnSalvarCrop = document.getElementById('btn-salvar-crop');
+    if (btnSalvarCrop) {
+        btnSalvarCrop.addEventListener('click', function () {
+            setTimeout(() => {
+                carregarDadosUsuario();
+            }, 500);
+        });
+    }
+
+    carregarWallpaper();
+    carregarDadosUsuario();
+
+});

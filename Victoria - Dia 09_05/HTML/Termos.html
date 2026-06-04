@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Victoria - Iluminando caminhos através da tecnologia e inovação.">
+    <title>Termos e Privacidade | Projeto Victoria</title>
+
+    <link rel="stylesheet" href="../CSS/Geral.css">
+    <link rel="stylesheet" href="../CSS/Metodologia.css">
+    <link rel="stylesheet" href="../CSS/Dashboard.css">
+    <link rel="stylesheet" href="../CSS/Responsividade.css">
+
+    <link rel="icon" type="image/x-icon" href="../Imagens/Ícones/Victoria.ico">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
+</head>
+
+<body>
+
+    <nav class="nav-wrapper">
+        <div class="nav-content">
+            <a href="Inicial.html" class="brand-logo">
+                <img src="../Imagens/Geral/Victoria.png" alt="Logotipo Victoria" class="logo-icon">
+            </a>
+    
+            <ul class="nav-list-center">
+                <li class="nav-item has-dropdown">
+                    <a href="#" class="nav-link">
+                        <i class="fa-solid fa-droplet nav-icon"></i> Plataforma
+                        <svg class="chevron-icon" width="10" height="6" viewBox="0 0 10 6" fill="none">
+                            <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                        </svg>
+                    </a>
+                    <div class="mega-menu-wrapper">
+                        <div class="mega-menu-inner">
+                            <div class="menu-column">
+                                <h3><i class="fa-solid fa-chart-line"></i> Telemetria</h3>
+                                <a href="Dashboard.html" class="rich-link-item">
+                                    <span class="item-title">Dashboard Analítico</span>
+                                    <span class="item-desc">Monitoramento de fluxo em tempo real.</span>
+                                </a>
+                                <a href="Relatórios.html" class="rich-link-item">
+                                    <span class="item-title">Relatórios Estatísticos</span>
+                                    <span class="item-desc">Consumo médio e picos de vazão.</span>
+                                </a>
+                            </div>
+                            <div class="menu-column">
+                                <h3><i class="fa-solid fa-microchip"></i> Arquitetura</h3>
+                                <a href="Hardware.html" class="rich-link-item">
+                                    <span class="item-title">Especificação de Hardware</span>
+                                    <span class="item-desc">Microcontroladores e sensores de precisão.</span>
+                                </a>
+                                <a href="Protocolos.html" class="rich-link-item">
+                                    <span class="item-title">Protocolos IoT</span>
+                                    <span class="item-desc">Comunicação e integridade de dados.</span>
+                                </a>
+                            </div>
+                            <div class="menu-column">
+                                <h3><i class="fa-solid fa-book"></i> Acadêmico</h3>
+                                <a href="Documentação.html" class="rich-link-item">
+                                    <span class="item-title">Documentação</span>
+                                    <span class="item-desc">Documentação técnica integral do projeto.</span>
+                                </a>
+                                <a href="Referências.html" class="rich-link-item">
+                                    <span class="item-title">Referencial Teórico</span>
+                                    <span class="item-desc">Base científica do ecossistema Victoria.</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="nav-item"><a href="Metodologia.html" class="nav-link"><i class="fa-solid fa-flask nav-icon"></i>
+                        Metodologia</a>
+                </li>
+                <li class="nav-item"><a href="Sobre.html" class="nav-link"><i class="fa-solid fa-circle-info nav-icon"></i>
+                        Sobre o
+                        TCC</a></li>
+            </ul>
+    
+            <div class="nav-right">
+                <div class="container-usuario-nav">
+                    <a href="Login.html" class="nav-btn-access" id="btn-login-nav">
+                        <i class="fa-solid fa-key"></i> Fazer Login
+                    </a>
+    
+                    <div class="perfil-usuario-wrapper" id="wrapper-usuario-logado" style="display: none;">
+                        <button class="avatar-trigger-nav" id="btn-avatar-nav">
+                            <span class="inicial-avatar">?</span>
+                        </button>
+    
+                        <div class="dropdown-perfil-glass" id="dropdown-perfil">
+                            <div class="dropdown-header">
+                                <span class="user-email"></span>
+                                <button class="btn-fechar-dropdown" id="fechar-dropdown"><i
+                                        class="fas fa-times"></i></button>
+                            </div>
+    
+                            <div class="dropdown-body-central">
+                                <div class="avatar-grande-container">
+                                    <span class="inicial-avatar-grande">?</span>
+                                    <button class="btn-editar-foto"><i class="fas fa-camera"></i></button>
+                                </div>
+                                <h3 class="saudacao-usuario"></h3>
+                                <a href="Perfil.html" class="btn-gerir-conta">Configurações de Perfil</a>
+                            </div>
+    
+                            <div class="dropdown-footer">
+                                <button class="btn-logout" id="btn-logout">
+                                    <i class="fas fa-sign-out-alt"></i> Encerrar Sessão
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+<main>
+    <section class="static-hero">
+        <img src="../Imagens/Sobre/Fundo.png" alt="Fundo Dashboard">
+        <div class="hero-overlay"></div>
+        <div class="hero-text reveal active">
+            <span class="hero-subtitle">Transparência</span>
+            <h1>Termos e Privacidade</h1>
+            <p>Entenda como coletamos e utilizamos seus dados para garantir a transparência e a segurança no uso da plataforma.</p>
+        </div>
+    </section> <br> <br> <br> <br><br> <br><br> <br>
+
+
+    <div class="dashboard-main-wrapper" style="margin-top: -80px;">
+        <div class="dashboard-container" style="max-width: 1000px;">
+
+            <section class="glass-inner-panel" style="padding: 50px;">
+                <div class="termos-content">
+                    <h3 style="color: var(--ink-black); font-size: 1.5rem; margin-bottom: 20px;"><i
+                            class="fas fa-user-lock" style="color: var(--dark-teal);"></i> 1. Coleta de Dados</h3>
+                    <p style="color: var(--dark-teal); line-height: 1.8; margin-bottom: 40px; font-weight: 500;">
+                        No Projeto Victoria, tratamos seus dados com a máxima segurança. Coletamos apenas as informações
+                        essenciais de telemetria (vazão e consumo) para gerar os relatórios e estimativas de gastos
+                        presentes no seu painel. Nenhuma informação pessoal é vendida ou compartilhada com terceiros sem
+                        consentimento explícito.
+                    </p>
+
+                    <h3 style="color: var(--ink-black); font-size: 1.5rem; margin-bottom: 20px;"><i
+                            class="fas fa-microchip" style="color: var(--dark-teal);"></i> 2. Uso da Telemetria</h3>
+                    <p style="color: var(--dark-teal); line-height: 1.8; margin-bottom: 40px; font-weight: 500;">
+                        Os dados capturados pelos nossos sensores microcontrolados são processados localmente e
+                        criptografados antes do envio para o dashboard. O objetivo principal é fornecer ferramentas
+                        analíticas para a economia hídrica e sustentabilidade ambiental, alinhados aos propósitos
+                        acadêmicos deste TCC.
+                    </p>
+
+                    <h3 style="color: var(--ink-black); font-size: 1.5rem; margin-bottom: 20px;"><i
+                            class="fas fa-cookie-bite" style="color: var(--dark-teal);"></i> 3. Cookies e LocalStorage
+                    </h3>
+                    <p style="color: var(--dark-teal); line-height: 1.8; margin-bottom: 40px; font-weight: 500;">
+                        Utilizamos tecnologias como LocalStorage e Cookies de sessão exclusivamente para manter você
+                        logado, salvar suas preferências de interface (como o modo escuro) e armazenar temporariamente o
+                        log de atividades (medições manuais) de forma a otimizar a velocidade da plataforma.
+                    </p>
+
+                    <hr style="border: none; border-top: 1px solid rgba(89, 131, 146, 0.2); margin: 40px 0;">
+
+                    <p style="color: var(--air-force-blue); font-size: 0.9rem; font-weight: 700; text-align: center;">
+                        Última atualização: Março de 2026. Equipe Projeto Victoria.
+                    </p>
+                </div>
+            </section>
+
+        </div>
+    </div>
+</main>
+
+<footer class="floating-footer">
+    <div class="footer-content">
+        <div class="footer-logo-area">
+            <img src="../Imagens/Geral/Victoria.png" alt="Logo Victoria" class="footer-logo">
+            <p>Transformando a forma como você monitora e economiza água com tecnologia inteligente. Desenvolvido
+                como projeto de conclusão de
+                curso.</p>
+        </div>
+
+        <div class="footer-links">
+            <h4>Recursos</h4>
+            <ul>
+                <li><a href="Documentação.html" style="text-decoration: none;">Documentação</a></li>
+                <li><a href="Performance.html" style="text-decoration: none;">Telemetria Real-time</a></li>
+                <li><a href="Status.html" style="text-decoration: none;">Status do Sistema</a></li>
+                <li><a href="Privacidade.html" style="text-decoration: none;">Termos e Ética</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-contact">
+            <h4>Conexão Técnica</h4>
+            <p><i class="fa-solid fa-envelope"></i> Qualqueremail@Gmail.com</p>
+            <p><i class="fa-solid fa-location-dot"></i> Etec Lauro Gomes</p>
+            <p><i class="fa-solid fa-code-branch"></i> Versão do Sistema: v0.0.3 Alpha</p>
+        </div>
+
+        <div class="footer-social">
+            <h4>Presença Digital</h4>
+            <div class="social-icons">
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <a id="backtotop" href="#top" aria-label="Voltar ao topo">
+        <i class="fas fa-chevron-up"></i>
+    </a>
+
+    <div class="footer-bottom">
+        <p>&copy; 2026 Projeto Victoria. Todos os direitos reservados à equipe de desenvolvimento.</p>
+    </div>
+</footer>
+
+<script src="../JS/Auth.js"></script>
+<script src="../JS/Geral.js"></script>
+</body>
+
+</html>
