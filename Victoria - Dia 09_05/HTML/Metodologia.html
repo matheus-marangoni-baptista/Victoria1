@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Metodologia - Projeto Victoria">
+    <title>Metodologia | Projeto Victoria</title>
+
+    <link rel="stylesheet" href="../CSS/Geral.css">
+    <link rel="stylesheet" href="../CSS/Metodologia.css">
+    <link rel="stylesheet" href="../CSS/Responsividade.css">
+
+    <link rel="icon" type="image/x-icon" href="../Imagens/Ícones/Victoria.ico">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
+</head>
+
+<body>
+    <div id="top"></div>
+
+    <nav class="nav-wrapper">
+        <div class="nav-content">
+            <a href="Inicial.html" class="brand-logo">
+                <img src="../Imagens/Geral/Victoria.png" alt="Logotipo Victoria" class="logo-icon">
+            </a>
+
+            <ul class="nav-list-center">
+                <li class="nav-item has-dropdown">
+                    <a href="#" class="nav-link">
+                        <i class="fa-solid fa-droplet nav-icon"></i> Plataforma
+                        <svg class="chevron-icon" width="10" height="6" viewBox="0 0 10 6" fill="none">
+                            <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                        </svg>
+                    </a>
+                    <div class="mega-menu-wrapper">
+                        <div class="mega-menu-inner">
+                            <div class="menu-column">
+                                <h3><i class="fa-solid fa-chart-line"></i> Telemetria</h3>
+                                <a href="Dashboard.html" class="rich-link-item">
+                                    <span class="item-title">Dashboard Analítico</span>
+                                    <span class="item-desc">Monitoramento de fluxo em tempo real.</span>
+                                </a>
+                                <a href="Relatórios.html" class="rich-link-item">
+                                    <span class="item-title">Relatórios Estatísticos</span>
+                                    <span class="item-desc">Consumo médio e picos de vazão.</span>
+                                </a>
+                            </div>
+                            <div class="menu-column">
+                                <h3><i class="fa-solid fa-microchip"></i> Arquitetura</h3>
+                                <a href="Hardware.html" class="rich-link-item">
+                                    <span class="item-title">Especificação de Hardware</span>
+                                    <span class="item-desc">Microcontroladores e sensores de precisão.</span>
+                                </a>
+                                <a href="Protocolos.html" class="rich-link-item">
+                                    <span class="item-title">Protocolos IoT</span>
+                                    <span class="item-desc">Comunicação e integridade de dados.</span>
+                                </a>
+                            </div>
+                            <div class="menu-column">
+                                <h3><i class="fa-solid fa-book"></i> Acadêmico</h3>
+                                <a href="Documentação.html" class="rich-link-item">
+                                    <span class="item-title">Documentação</span>
+                                    <span class="item-desc">Documentação técnica integral do projeto.</span>
+                                </a>
+                                <a href="Referências.html" class="rich-link-item">
+                                    <span class="item-title">Referencial Teórico</span>
+                                    <span class="item-desc">Base científica do ecossistema Victoria.</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="nav-item"><a href="Metodologia.html" class="nav-link"><i
+                            class="fa-solid fa-flask nav-icon"></i>
+                        Metodologia</a>
+                </li>
+                <li class="nav-item"><a href="Sobre.html" class="nav-link"><i
+                            class="fa-solid fa-circle-info nav-icon"></i>
+                        Sobre o
+                        TCC</a></li>
+            </ul>
+
+            <div class="nav-right">
+                <div class="container-usuario-nav">
+                    <a href="Login.html" class="nav-btn-access" id="btn-login-nav">
+                        <i class="fa-solid fa-key"></i> Fazer Login
+                    </a>
+
+                    <div class="perfil-usuario-wrapper" id="wrapper-usuario-logado" style="display: none;">
+                        <button class="avatar-trigger-nav" id="btn-avatar-nav">
+                            <span class="inicial-avatar">?</span>
+                        </button>
+
+                        <div class="dropdown-perfil-glass" id="dropdown-perfil">
+                            <div class="dropdown-header">
+                                <span class="user-email"></span>
+                                <button class="btn-fechar-dropdown" id="fechar-dropdown"><i
+                                        class="fas fa-times"></i></button>
+                            </div>
+
+                            <div class="dropdown-body-central">
+                                <div class="avatar-grande-container">
+                                    <span class="inicial-avatar-grande">?</span>
+                                    <button class="btn-editar-foto"><i class="fas fa-camera"></i></button>
+                                </div>
+                                <h3 class="saudacao-usuario"></h3>
+                                <a href="Perfil.html" class="btn-gerir-conta">Configurações de Perfil</a>
+                            </div>
+
+                            <div class="dropdown-footer">
+                                <button class="btn-logout" id="btn-logout">
+                                    <i class="fas fa-sign-out-alt"></i> Encerrar Sessão
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <section class="static-hero">
+            <img src="../Imagens/Sobre/Fundo.png" alt="Fundo Metodologia">
+            <div class="hero-overlay"></div>
+            <div class="hero-text reveal active">
+                <span class="hero-subtitle">Rigor Científico & Inovação</span>
+                <h1>Metodologia do Projeto</h1>
+                <p>O caminho estruturado para o desenvolvimento do nosso Sistema de Medição e Monitoramento Inteligente
+                    de
+                    Consumo de Água.</p>
+            </div>
+        </section>
+
+        <section class="scope-section section-padding">
+            <div class="container-box reveal">
+                <div class="section-header">
+                    <span class="category-tag">Definição do Escopo</span>
+                    <h2>Tema e Problematização</h2>
+                </div>
+
+                <div class="theme-highlight glass-panel">
+                    <div class="theme-icon">
+                        <i class="fa-solid fa-droplet"></i>
+                    </div>
+                    <div class="theme-content">
+                        <h3>Tema Central</h3>
+                        <p>Desenvolvimento de um Sistema de Medição e Monitoramento Inteligente de Consumo de Água para
+                            Aplicação em Ambientes Residenciais e Condominiais, com Foco na Conscientização e Otimização
+                            de
+                            Recursos.</p>
+                    </div>
+                </div>
+
+                <div class="problems-grid">
+                    <div class="problem-card glass-panel">
+                        <span class="problem-badge highlight-badge">Visão Ampla</span>
+                        <h4>Como a tecnologia pode contribuir para a gestão sustentável de recursos naturais?</h4>
+                        <p>A tecnologia oferece ferramentas de monitoramento, otimização e controle, permitindo a
+                            identificação de desperdícios, a previsão de demandas e a implementação de práticas mais
+                            eficientes no uso de recursos como água e energia.</p>
+                    </div>
+
+                    <div class="problem-card glass-panel">
+                        <span class="problem-badge highlight-badge">Visão Intermediária</span>
+                        <h4>De que forma a Internet das Coisas (IoT) pode otimizar o consumo de água em edificações?
+                        </h4>
+                        <p>A IoT permite a coleta de dados em tempo real sobre o uso da água, a detecção precoce de
+                            vazamentos, o monitoramento de padrões de consumo e a automação de sistemas de controle,
+                            resultando em economia e uso mais consciente.</p>
+                    </div>
+
+                    <div class="problem-card glass-panel specific-problem">
+                        <span class="problem-badge highlight-badge">Questão Orientadora Específica</span>
+                        <h4>Como um sistema de medidor de água inteligente pode auxiliar moradores a monitorar o uso em
+                            tempo real e reduzir o consumo?</h4>
+                        <p>O sistema empodera moradores e administradores com informações precisas. Ao visualizar o uso
+                            em
+                            tempo real, identificar picos ou vazamentos através de alertas e relatórios, os usuários
+                            mudam
+                            hábitos, realizam manutenções preventivas e reduzem custos e desperdícios, contribuindo para
+                            a
+                            sustentabilidade hídrica.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="objectives-section section-padding">
+            <div class="container-box reveal">
+                <div class="section-header">
+                    <span class="category-tag">Nossas Metas</span>
+                    <h2>Objetivos do Projeto</h2>
+                </div>
+
+                <div class="general-objective glass-panel">
+                    <div class="objective-header">
+                        <i class="fa-solid fa-bullseye"></i>
+                        <h3>Objetivo Geral</h3>
+                    </div>
+                    <p>Desenvolver e validar um protótipo de sistema de medidor de água inteligente capaz de coletar,
+                        transmitir, armazenar e apresentar dados de consumo de água em tempo real para usuários
+                        residenciais
+                        e condominiais, visando a gestão eficiente e a conscientização sobre o uso da água.</p>
+                </div>
+
+                <div class="specific-objectives-container">
+                    <h3 class="subsection-title">Objetivos Específicos</h3>
+                    <ul class="specific-list">
+                        <li class="glass-panel">
+                            <i class="fa-solid fa-microchip"></i>
+                            <span>Pesquisar e selecionar componentes de hardware (sensor de fluxo, ESP32/Wi-Fi, energia)
+                                adequados em precisão e custo.</span>
+                        </li>
+                        <li class="glass-panel">
+                            <i class="fa-solid fa-hammer"></i>
+                            <span>Projetar e montar o módulo de hardware para medição do fluxo de água e transmissão dos
+                                dados.</span>
+                        </li>
+                        <li class="glass-panel">
+                            <i class="fa-solid fa-code"></i>
+                            <span>Desenvolver o firmware para o microcontrolador (leitura do sensor, processamento e
+                                comunicação).</span>
+                        </li>
+                        <li class="glass-panel">
+                            <i class="fa-solid fa-mobile-screen"></i>
+                            <span>Implementar plataforma de software (web/mobile) para receber, armazenar e visualizar
+                                dados, gráficos e alertas.</span>
+                        </li>
+                        <li class="glass-panel">
+                            <i class="fa-solid fa-chart-line"></i>
+                            <span>Desenvolver funcionalidades para identificação de padrões de consumo atípicos e
+                                potenciais
+                                vazamentos.</span>
+                        </li>
+                        <li class="glass-panel">
+                            <i class="fa-solid fa-vial-circle-check"></i>
+                            <span>Realizar testes de campo em ambiente controlado para avaliar precisão, confiabilidade
+                                e
+                                usabilidade.</span>
+                        </li>
+                        <li class="glass-panel">
+                            <i class="fa-solid fa-file-signature"></i>
+                            <span>Analisar os resultados obtidos e documentar todo o processo de desenvolvimento e
+                                validação
+                                final.</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="justification-section section-padding">
+            <div class="container-box reveal">
+                <div class="section-header">
+                    <span class="category-tag">A Importância</span>
+                    <h2>Justificativas</h2>
+                </div>
+
+                <div class="justification-grid">
+                    <div class="justification-card glass-panel">
+                        <div class="justification-icon">
+                            <i class="fa-solid fa-earth-americas"></i>
+                        </div>
+                        <h3>Social e de Mercado</h3>
+                        <p>A escassez hídrica é um desafio global. O consumo residencial muitas vezes é percebido apenas
+                            na
+                            conta mensal. Um medidor inteligente oferece dados em tempo real, capacitando decisões
+                            conscientes e sustentáveis. A detecção de vazamentos gera economia e evita danos, atendendo
+                            à
+                            crescente demanda do mercado por soluções IoT de automação residencial com forte impacto
+                            social.
+                        </p>
+                    </div>
+
+                    <div class="justification-card glass-panel">
+                        <div class="justification-icon">
+                            <i class="fa-solid fa-flask"></i>
+                        </div>
+                        <h3>Técnico-Científica</h3>
+                        <p>O projeto integra eletrônica embarcada, Internet das Coisas (IoT), desenvolvimento
+                            web/mobile,
+                            análise de dados e engenharia de software. A complexidade da integração hardware-software,
+                            garantindo precisão e robustez, eleva o rigor acadêmico do trabalho, exigindo aprofundamento
+                            teórico e prático significativo para a formulação de uma solução eficaz.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="methodology-approach section-padding">
+            <div class="container-box reveal">
+                <div class="section-header">
+                    <span class="category-tag">A Execução</span>
+                    <h2>Metodologia de Pesquisa</h2>
+                </div>
+                <div class="methodology-content glass-panel">
+                    <p>Em conformidade com as diretrizes de TCC, nosso projeto une o referencial teórico à aplicação
+                        prática. A metodologia baseia-se em uma pesquisa de natureza <strong>empírica e
+                            aplicada</strong>,
+                        envolvendo pesquisa de campo e testes de laboratório para a validação do protótipo . A
+                        sustentação
+                        técnica advém da <strong>pesquisa bibliográfica</strong>, que nos fornece a base de normas
+                        técnicas
+                        e conceitos de IoT necessários para a agregação de novos saberes.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="floating-footer">
+        <div class="footer-content">
+            <div class="footer-logo-area">
+                <img src="../Imagens/Geral/Victoria.png" alt="Logo Victoria" class="footer-logo">
+                <p>Transformando a forma como você monitora e economiza água com tecnologia inteligente. Desenvolvido
+                    como projeto de conclusão de
+                    curso.</p>
+            </div>
+
+            <div class="footer-links">
+                <h4>Recursos</h4>
+                <ul>
+                    <li><a href="Documentação.html" style="text-decoration: none;">Documentação</a></li>
+                    <li><a href="Relatórios.html" style="text-decoration: none;">Telemetria Real-time</a></li>
+                    <li><a href="Status.html" style="text-decoration: none;">Status do Sistema</a></li>
+                    <li><a href="Privacidade.html" style="text-decoration: none;">Termos e Ética</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-contact">
+                <h4>Conexão Técnica</h4>
+                <p><i class="fa-solid fa-envelope"></i> Qualqueremail@Gmail.com</p>
+                <p><i class="fa-solid fa-location-dot"></i> Etec Lauro Gomes</p>
+                <p><i class="fa-solid fa-code-branch"></i> Versão do Sistema: v0.0.3 Alpha</p>
+            </div>
+
+            <div class="footer-social">
+                <h4>Presença Digital</h4>
+                <div class="social-icons">
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <a id="backtotop" href="#top" aria-label="Voltar ao topo">
+            <i class="fas fa-chevron-up"></i>
+        </a>
+
+        <div class="footer-bottom">
+            <p>&copy; 2026 Projeto Victoria. Todos os direitos reservados à equipe de desenvolvimento.</p>
+        </div>
+    </footer>
+
+    <script src="../JS/Auth.js"></script>
+    <script src="../JS/Geral.js"></script>
+
+    <div id="modal-crop-foto" class="modal-overlay" style="display: none;">
+        <div class="modal-content crop-modal">
+            <h2>Atualizar Foto de Perfil</h2>
+
+            <div id="dropzone-avatar" class="dropzone">
+                <i class="fa-solid fa-cloud-arrow-up"></i>
+                <p>Arraste uma imagem, <strong>Cole (Ctrl+V)</strong> ou clique aqui</p>
+                <input type="file" id="input-foto-oculto" accept="image/*" style="display: none;">
+            </div>
+
+            <div class="cropper-container" style="display: none; width: 100%; max-height: 400px; margin-top: 15px;">
+                <img id="imagem-para-cortar" src="" style="max-width: 100%;">
+            </div>
+
+            <div class="modal-actions" style="margin-top: 20px;">
+                <button id="btn-cancelar-crop" class="btn-secondary">Cancelar</button>
+                <button id="btn-salvar-crop" class="btn-primary" style="display: none;">Salvar Foto</button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

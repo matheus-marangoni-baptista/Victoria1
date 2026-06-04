@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Victoria - Cadastro no Sistema">
+    <title>Cadastro | Projeto Victoria</title>
+
+    <link rel="stylesheet" href="../CSS/Geral.css">
+    <link rel="stylesheet" href="../CSS/Cadastro.css">
+    <link rel="stylesheet" href="../CSS/Responsividade.css"> 
+
+    <link rel="icon" type="image/x-icon" href="../Imagens/Ícones/Victoria.ico">
+
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+</head>
+
+<body>
+    <main class="container-cadastro-centralizado">
+        <div class="card-cadastro-split-flutuante">
+
+            <div class="split-coluna-formulario-card">
+                <a href="Login.php" class="link-voltar"><i class="fas fa-arrow-left"></i> Voltar</a>
+
+                <div class="header-cadastro">
+                    <div class="logo-container">
+                        <img src="../Imagens/Geral/Victoria.png" alt="Logo Victoria" class="logo-pequena">
+                    </div>
+                    <h2>Criar sua conta</h2>
+                </div>
+
+                <form class="formulario-cadastro" id="cadastroForm" method="POST" action="../PHP/Cadastro.php" enctype="multipart/form-data">
+
+                    <div class="campo-form-agrupado">
+                        <label for="nome">Nome Completo</label>
+                        <input type="text" id="nome" name="nome" placeholder="Seu nome completo" required>
+                    </div>
+
+                    <div class="campo-form-agrupado">
+                        <label for="email">E-mail</label>
+                        <input type="email" id="email" name="email" placeholder="seu@email.com" required>
+                    </div>
+
+                    <div class="campo-form-agrupado">
+                        <label for="password">Senha</label>
+                        <input type="password" id="password" name="password" placeholder="Sua senha" required>
+                        <i class="fas fa-eye toggle-password" title="Mostrar senha"></i>
+                    </div>
+
+                    <div class="campo-form-agrupado">
+                        <label for="confirm-password">Confirmar Senha</label>
+                        <input type="password" id="confirm-password" name="confirm-password"
+                            placeholder="Confirme a senha" required>
+                        <i class="fas fa-eye toggle-password" title="Mostrar senha"></i>
+                    </div>
+
+                    <div class="opcoes-adicionais-central">
+                        <label class="agree-terms">
+                            <input type="checkbox" name="terms" required>
+                            <span>Concordo com os <a href="Termos.html">Termos de Serviço</a></span>
+                        </label>
+                    </div>
+
+                    <button type="submit" class="botao-submit-card">Criar Conta no Victoria</button>
+
+                    <div class="separador-card">ou</div>
+
+                    <div class="botao-social-card google desativado">
+                        <i class="fab fa-google"></i> Continuar com Google
+                        <span class="badge-em-breve">Em breve</span>
+                    </div>
+
+                    <div class="botao-social-card microsoft desativado">
+                        <i class="fab fa-microsoft"></i> Continuar com Microsoft 365
+                        <span class="badge-em-breve">Em breve</span>
+                    </div>
+
+                </form>
+
+                <div class="rodape-cadastro-card">
+                    <p>Já tem conta? <a href="Login.php">Faça login aqui</a></p>
+                </div>
+            </div>
+
+            <div class="split-coluna-visual-card">
+                <div class="bloco-testemunho">
+                    <i class="fas fa-quote-left"></i>
+                    <h3>"Juntar-se ao Victoria foi uma decisão que transformou minha experiência."</h3>
+                    <p class="autor-testemunho">Comunidade Victoria • Inovadores</p>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="../JS/Cadastros.js"></script>
+  <!--  <script src="../JS/Auth.js"></script>
+    <script src="../JS/Geral.js"></script>
+    <script src="../JS/Cadastro.js"></script> -->
+</body>
+
+</html>
