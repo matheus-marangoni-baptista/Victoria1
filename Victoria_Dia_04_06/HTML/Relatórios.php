@@ -1,3 +1,8 @@
+<?php
+    include "../PHP/Protect.php";
+    Protect();
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -44,11 +49,11 @@
                         <div class="mega-menu-inner">
                             <div class="menu-column">
                                 <h3><i class="fa-solid fa-chart-line"></i> Telemetria</h3>
-                                <a href="Dashboard.html" class="rich-link-item">
+                                <a href="Dashboard.php" class="rich-link-item">
                                     <span class="item-title">Dashboard Analítico</span>
                                     <span class="item-desc">Monitoramento de fluxo em tempo real.</span>
                                 </a>
-                                <a href="Relatórios.html" class="rich-link-item">
+                                <a href="Relatórios.php" class="rich-link-item">
                                     <span class="item-title">Relatórios Estatísticos</span>
                                     <span class="item-desc">Consumo médio e picos de vazão.</span>
                                 </a>
@@ -90,7 +95,7 @@
 
             <div class="nav-right">
                 <div class="container-usuario-nav">
-                    <a href="Login.html" class="nav-btn-access" id="btn-login-nav">
+                    <a href="Login.php" class="nav-btn-access" id="btn-login-nav">
                         <i class="fa-solid fa-key"></i> Fazer Login
                     </a>
 
