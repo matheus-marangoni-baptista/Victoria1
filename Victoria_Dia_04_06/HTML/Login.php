@@ -8,11 +8,11 @@ $erro = array();
 
 if (isset($_POST['email']) && strlen($_POST['email']) > 0){
     $_SESSION['email'] = $con->escape_string($_POST['email']);
-    $_SESSION['senha'] = $_POST['senha']; //Verificar aqui depois rapaz
+    $_SESSION['senha'] = $_POST['senha'];
 
     $sql_code = "SELECT senha, id FROM usuario WHERE email = '$_SESSION[email]'";
     $sql_query = $con->query($sql_code) or die($con->error);
-    $dado = $sql_query->fetch_assoc(); //koko ni
+    $dado = $sql_query->fetch_assoc();
     $total = $sql_query->num_rows;
 
     if($total == 0){

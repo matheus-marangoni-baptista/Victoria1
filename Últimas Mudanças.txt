@@ -1,4 +1,5 @@
 Últimas Mudanças
+--ALTER TABLE usuario AUTO_INCREMENT = 1; --tem que excluir todos os outros registros
 
 16 / 04
 Login e Cadastro arrumados com senha em password_hash("", PASSWORD_DEFAULT);
