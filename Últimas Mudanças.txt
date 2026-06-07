@@ -1,5 +1,7 @@
-Últimas Mudanças
 --ALTER TABLE usuario AUTO_INCREMENT = 1; --tem que excluir todos os outros registros
+<?php if(isset($_SESSION['email'])){echo "Desconectar";}else{echo "Fazer Login";}; ?> --href de <a></a>
+
+Últimas Mudanças
 
 16 / 04
 Login e Cadastro arrumados com senha em password_hash("", PASSWORD_DEFAULT);
@@ -14,3 +16,6 @@ Arrumei um pouco do consumo de água, vai ficar com um alerta mas tá funcionand
 04/06
 Coloquei no GitHub essa bomba, ainda to tentando deixar o banco em nuvem
 e o projeto online,-
+
+05/06
+Páginas Dashboard e Relatórios colocadas em PHP e protegidas, com botão de logout no canto :>

@@ -1,3 +1,8 @@
+<?php
+    include "../PHP/Protect.php";
+    Protect();
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -89,8 +94,8 @@
 
             <div class="nav-right">
                 <div class="container-usuario-nav">
-                    <a href="Login.html" class="nav-btn-access" id="btn-login-nav">
-                        <i class="fa-solid fa-key"></i> Fazer Login
+                    <a href="../PHP/Logout.php" onclick="return confirm('Deseja fazer logout?');" class="nav-btn-access" id="btn-login-nav">
+                        <i class="fa-solid fa-key"></i>Desconectar
                     </a>
 
                     <div class="perfil-usuario-wrapper" id="wrapper-usuario-logado" style="display: none;">

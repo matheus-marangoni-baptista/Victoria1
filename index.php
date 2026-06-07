@@ -1,6 +1,6 @@
 <?php
 
-  header("Location:  Victoria_Dia_04_06/HTML/Login.php");
+  header("Location:  Victoria_Dia_04_06/HTML/Inicial.html");
 
   exit();
 
